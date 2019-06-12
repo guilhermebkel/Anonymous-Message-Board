@@ -1,27 +1,38 @@
-# Anonym
+**FreeCodeCamp**- Information Security and Quality Assurance
+-----
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
+1) SET NODE_ENV to `test` without quotes when ready to write tests and DB to your databases connection string (in .env)
 
-## Development server
+2) Recomended to create controllers/handlers and handle routing in routes/api.js
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+3) You will add any security features to `server.js`
 
-## Code scaffolding
+4) You will create all of the functional/unit tests in `tests/2_functional-tests.js` and `tests/1_unit-tests.js` but only functional will be tested
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+5) Only allow your site to be loading in an iFrame on your own pages. 
 
-## Build
+6) Do not allow DNS prefetching.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+7) Only allow your site to send the referrer for your own pages.
 
-## Running unit tests
+8) I can POST a thread to a specific message board by passing form data text and delete_password to /api/threads/{board}.(Recomend res.redirect to board page /b/{board})
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+9) Saved will be _id, text, created_on(date&amp;time), bumped_on (date&amp;time, starts same as created_on), reported (boolean), delete_password, &amp; replies(array).
 
-## Running end-to-end tests
+10) I can POST a reply to a thead on a specific board by passing form data text, delete_password, &amp; thread_id to /api/replies/{board} and it will also update the bumped_on date to the comments date.(Recomend res.redirect to thread page /b/{board}/{thread_id})
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+11) In the thread's 'replies' array will be saved _id, text, created_on, delete_password, &amp; reported.
 
-## Further help
+12) I can GET an array of the most recent 10 bumped threads on the board with only the most recent 3 replies from /api/threads/{board}. The reported and delete_passwords fields will not be sent.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+13) I can GET an entire thread with all it's replies from /api/replies/{board}?thread_id={thread_id}. Also hiding the same fields.
+
+14) I can delete a thread completely if I send a DELETE request to /api/threads/{board} and pass along the thread_id &amp; delete_password. (Text response will be 'incorrect password' or 'success')
+
+15) I can delete a post(just changing the text to 'deleted') if I send a DELETE request to /api/replies/{board} and pass along the thread_id, reply_id, &amp; delete_password. (Text response will be 'incorrect password' or 'success')
+
+16) I can report a thread and change it's reported value to true by sending a PUT request to /api/threads/{board} and pass along the thread_id. (Text response will be 'success')
+
+17) I can report a reply and change it's reported value to true by sending a PUT request to /api/replies/{board} and pass along the thread_id</code> &amp; <code>reply_id</code>. (Text response will be 'success')
+
+18) Complete functional tests that wholely test routes and pass.
