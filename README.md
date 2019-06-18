@@ -1,27 +1,27 @@
 **FreeCodeCamp**- Information Security and Quality Assurance
 -----
 
-1) SET NODE_ENV to `test` without quotes when ready to write tests and DB to your databases connection string (in .env)
+1) **DONE:** SET NODE_ENV to `test` without quotes when ready to write tests and DB to your databases connection string (in .env)
 
 2) Recomended to create controllers/handlers and handle routing in routes/api.js
 
-3) You will add any security features to `server.js`
+3) **DONE:** You will add any security features to `server.js`
 
 4) You will create all of the functional/unit tests in `tests/2_functional-tests.js` and `tests/1_unit-tests.js` but only functional will be tested
 
-5) Only allow your site to be loading in an iFrame on your own pages. 
+5) **DONE:** Only allow your site to be loading in an iFrame on your own pages. 
 
-6) Do not allow DNS prefetching.
+6) **DONE:** Do not allow DNS prefetching.
 
-7) Only allow your site to send the referrer for your own pages.
+7) **DONE:** Only allow your site to send the referrer for your own pages.
 
 8) I can POST a thread to a specific message board by passing form data text and delete_password to /api/threads/{board}.(Recomend res.redirect to board page /b/{board})
 
-9) Saved will be _id, text, created_on(date&amp;time), bumped_on (date&amp;time, starts same as created_on), reported (boolean), delete_password, &amp; replies(array).
+9) **DONE:** Saved will be _id, text, created_on(date&amp;time), bumped_on (date&amp;time, starts same as created_on), reported (boolean), delete_password, &amp; replies(array).
 
 10) I can POST a reply to a thead on a specific board by passing form data text, delete_password, &amp; thread_id to /api/replies/{board} and it will also update the bumped_on date to the comments date.(Recomend res.redirect to thread page /b/{board}/{thread_id})
 
-11) In the thread's 'replies' array will be saved _id, text, created_on, delete_password, &amp; reported.
+11) **DONE:** In the thread's 'replies' array will be saved _id, text, created_on, delete_password, &amp; reported.
 
 12) I can GET an array of the most recent 10 bumped threads on the board with only the most recent 3 replies from /api/threads/{board}. The reported and delete_passwords fields will not be sent.
 
