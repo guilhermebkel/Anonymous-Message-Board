@@ -1,4 +1,4 @@
-const BoardSchema = require('../db/boardSchema');
+const BoardSchema = require('../db/schemas/boardSchema');
 
 module.exports = function(){
     
