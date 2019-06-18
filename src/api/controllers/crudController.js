@@ -1,9 +1,10 @@
-const BoardSchema = require('../db/schemas/boardSchema');
+const ThreadSchema = require('../db/schemas/threadSchema');
+const ReplySchema = require('../db/schemas/replySchema');
 
 module.exports = function(){
     
     get('/boards', (req, res) => {
-        BoardSchema.find({}, (error, data) => {
+        ThreadSchema.find({}, (error, data) => {
             if(error){
                 res.json({"error": error});
             }
@@ -14,7 +15,7 @@ module.exports = function(){
     });
 
     get('/boards/:id', (req, res) => {
-        BoardSchema.findById(req.params.id, (error, data) => {
+        ThreadSchema.findById(req.params.id, (error, data) => {
             if(error){
                 res.json({"error": error});
             }

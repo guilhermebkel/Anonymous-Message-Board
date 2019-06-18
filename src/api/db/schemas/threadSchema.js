@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
-const BoardSchema = {
-    name: 'boards',
+const ThreadSchema = {
+    name: 'threads',
     schema: {
         id: {
             type: Sequelize.INTEGER,
@@ -34,10 +34,10 @@ const BoardSchema = {
         },
     },
     options: {
-        tableName: 'TB_BOARDS',
+        tableName: 'TB_THREADS',
         freeTableName: false,
         timestamps: false,
     }
 }
 
-module.exports = BoardSchema;
+module.exports = ThreadSchema;
