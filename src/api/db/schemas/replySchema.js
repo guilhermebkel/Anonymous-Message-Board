@@ -9,6 +9,10 @@ const ReplySchema = {
             primaryKey: true,
             autoIncrement: true,
         },
+        thread_id: {
+            type: Sequelize.INTEGER,
+            required: true,
+        },
         text: {
             type: Sequelize.STRING,
             required: true,
@@ -16,10 +20,10 @@ const ReplySchema = {
         created_on: {
             type: Sequelize.DATE,
             required: true,
-            autoIncrement: true,
         },
         reported: {
             type: Sequelize.BOOLEAN,
+            default: false,
         },
         delete_password: {
             type: Sequelize.STRING,
