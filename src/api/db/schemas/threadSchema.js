@@ -9,6 +9,10 @@ const ThreadSchema = {
             primaryKey: true,
             autoIncrement: true,
         },
+        board_id: {
+            type: Sequelize.INTEGER,
+            required: true,
+        },
         text: {
             type: Sequelize.STRING,
             required: true,
@@ -16,14 +20,14 @@ const ThreadSchema = {
         created_on: {
             type: Sequelize.DATE,
             required: true,
-            autoIncrement: true,
         },
         bumped_on: {
             type: Sequelize.DATE,
-            autoIncrement: true,
+            allowNull: true,
         },
         reported: {
             type: Sequelize.BOOLEAN,
+            default: false,
         },
         delete_password: {
             type: Sequelize.STRING,
@@ -31,6 +35,7 @@ const ThreadSchema = {
         },
         replies: {
             type: Sequelize.ARRAY,
+            default: [],
         },
     },
     options: {
