@@ -17,7 +17,7 @@
 
 8) **DONE:** I can POST a thread to a specific message board by passing form data text and delete_password to /api/threads/{board}.(Recomend res.redirect to board page /b/{board})
 
-9) **DONE:** Saved will be _id, text, created_on(date&amp;time), bumped_on (date&amp;time, starts same as created_on), reported (boolean), delete_password, &amp; replies(array).
+9) **DONE:** Saved will be _id, text, created_on(date&amp;time), bumped_on (date&amp;time, starts same as created_on), reported (boolean), delete_password, &amp; replies(array)
 
 10) **DONE:** I can POST a reply to a thead on a specific board by passing form data text, delete_password, &amp; thread_id to /api/replies/{board} and it will also update the bumped_on date to the comments date.(Recomend res.redirect to thread page /b/{board}/{thread_id})
 
