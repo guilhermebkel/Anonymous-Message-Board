@@ -15,24 +15,24 @@
 
 7) **DONE:** Only allow your site to send the referrer for your own pages.
 
-8) I can POST a thread to a specific message board by passing form data text and delete_password to /api/threads/{board}.(Recomend res.redirect to board page /b/{board})
+8) **DONE:** I can POST a thread to a specific message board by passing form data text and delete_password to /api/threads/{board}.(Recomend res.redirect to board page /b/{board})
 
 9) **DONE:** Saved will be _id, text, created_on(date&amp;time), bumped_on (date&amp;time, starts same as created_on), reported (boolean), delete_password, &amp; replies(array).
 
-10) I can POST a reply to a thead on a specific board by passing form data text, delete_password, &amp; thread_id to /api/replies/{board} and it will also update the bumped_on date to the comments date.(Recomend res.redirect to thread page /b/{board}/{thread_id})
+10) **DONE:** I can POST a reply to a thead on a specific board by passing form data text, delete_password, &amp; thread_id to /api/replies/{board} and it will also update the bumped_on date to the comments date.(Recomend res.redirect to thread page /b/{board}/{thread_id})
 
 11) **DONE:** In the thread's 'replies' array will be saved _id, text, created_on, delete_password, &amp; reported.
 
-12) I can GET an array of the most recent 10 bumped threads on the board with only the most recent 3 replies from /api/threads/{board}. The reported and delete_passwords fields will not be sent.
+12) **DONE:** I can GET an array of the most recent 10 bumped threads on the board with only the most recent 3 replies from /api/threads/{board}. The reported and delete_passwords fields will not be sent.
 
-13) I can GET an entire thread with all it's replies from /api/replies/{board}?thread_id={thread_id}. Also hiding the same fields.
+13) **DONE:** I can GET an entire thread with all it's replies from /api/replies/{board}?thread_id={thread_id}. Also hiding the same fields.
 
-14) I can delete a thread completely if I send a DELETE request to /api/threads/{board} and pass along the thread_id &amp; delete_password. (Text response will be 'incorrect password' or 'success')
+14) **DONE:** I can delete a thread completely if I send a DELETE request to /api/threads/{board} and pass along the thread_id &amp; delete_password. (Text response will be 'incorrect password' or 'success')
 
-15) I can delete a post(just changing the text to 'deleted') if I send a DELETE request to /api/replies/{board} and pass along the thread_id, reply_id, &amp; delete_password. (Text response will be 'incorrect password' or 'success')
+15) **DONE:** I can delete a post(just changing the text to 'deleted') if I send a DELETE request to /api/replies/{board} and pass along the thread_id, reply_id, &amp; delete_password. (Text response will be 'incorrect password' or 'success')
 
-16) I can report a thread and change it's reported value to true by sending a PUT request to /api/threads/{board} and pass along the thread_id. (Text response will be 'success')
+16) **DONE:** I can report a thread and change it's reported value to true by sending a PUT request to /api/threads/{board} and pass along the thread_id. (Text response will be 'success')
 
-17) I can report a reply and change it's reported value to true by sending a PUT request to /api/replies/{board} and pass along the thread_id</code> &amp; <code>reply_id</code>. (Text response will be 'success')
+17) **DONE:** I can report a reply and change it's reported value to true by sending a PUT request to /api/replies/{board} and pass along the thread_id</code> &amp; <code>reply_id</code>. (Text response will be 'success')
 
 18) Complete functional tests that wholely test routes and pass.
