@@ -1,10 +1,10 @@
 const express = require('express');
 const server = express();
-const cors = require('./routes/cors');
-const helmet = require('./routes/helmet');
 const { config } = require('dotenv');
 const { join } = require('path')
-const databaseConnection = require('./db/postgres');
+const databaseConnection = require('./helpers/db');
+const cors = require('./helpers/cors');
+const helmet = require('./helpers/helmet');
 
 const dotenvPath = join(__dirname, '..', './config', '.env');
 config({

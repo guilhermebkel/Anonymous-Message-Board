@@ -1,6 +1,9 @@
+const express = require('express');
+const routes = express.Router();
+
 const ThreadController = require('../controllers/ThreadController');
 
-server.post('/threads', ThreadController.createThread);
-server.get('/threads/:board_id', ThreadController.getAllThreads);
-server.delete('/threads', ThreadController.deleteThread);
-server.put('/threads', ThreadController.updateThread);
+routes.post('/threads', ThreadController.createThread);
+routes.get('/threads/:board_id', ThreadController.getAllThreads);
+routes.delete('/threads', ThreadController.deleteThread);
+routes.put('/threads', ThreadController.updateThread);

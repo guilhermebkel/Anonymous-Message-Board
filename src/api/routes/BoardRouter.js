@@ -1,3 +1,6 @@
+const express = require('express');
+const routes = express.Router();
+
 const BoardController = require('../controllers/BoardController');
 
-server.get('/boards', BoardController.getBoards);
+routes.get('/boards', BoardController.getBoards);
