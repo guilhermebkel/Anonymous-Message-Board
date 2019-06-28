@@ -1,9 +1,9 @@
-const BoardSchema = require('../../db/schemas/boardSchema');
+const BoardModel = require('../models/BoardModel');
 
-module.exports = function(){
+module.exports = {
     
-    server.get('/boards', (req, res) => {
-        BoardSchema.findAll({}, (error, data) => {
+    async getBoards(req, res){
+        BoardModel.findAll({}, (error, data) => {
             if(data){
                 res.json(data);
             }
@@ -11,6 +11,5 @@ module.exports = function(){
                 console.error(error);
             }
         })
-    })
-
+    }
 }
