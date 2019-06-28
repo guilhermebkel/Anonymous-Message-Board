@@ -1,4 +1,4 @@
-const ThreadController = require('./../controllers/threadController');
+const ThreadController = require('../controllers/ThreadController');
 
 server.post('/threads', ThreadController.createThread);
 server.get('/threads/:board_id', ThreadController.getAllThreads);
