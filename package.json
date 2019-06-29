@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "nodemon src/api/server.js"
+    "server": "nodemon src/api/core/index.js"
   },
   "private": true,
   "dependencies": {
@@ -27,9 +27,11 @@
     "mongoose": "^5.5.15",
     "nodemon": "^1.19.1",
     "pg": "^7.11.0",
+    "pg-query-stream": "^2.0.0",
     "rxjs": "~6.4.0",
     "sequelize": "^5.8.9",
     "tslib": "^1.9.0",
+    "umzug": "^2.2.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
