@@ -7,10 +7,7 @@ const core = require('../../core')
 const models = {}
 
 module.exports = {
-  setup,
-  get models () {
-    return models
-  }
+  setup
 }
 
 async function setup () {
@@ -41,7 +38,7 @@ function setupConnection () {
 async function testConnection () {
   try {
     await sequelize.authenticate()
-    console.log(`Connected to Postgres [${sequelize.options.host}]`)
+    console.log(`- Connected to Postgres [${sequelize.options.host}]`)
   } catch (e) {
     console.error('[ERROR] Unable to connect to the database:', e.message)
     process.exit(1)
