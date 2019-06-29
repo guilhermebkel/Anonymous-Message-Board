@@ -4,12 +4,6 @@ const Umzug = require('umzug')
 
 const core = require('../../core')
 
-const DB_HOST = process.env.DB_HOST
-const DB_PORT = process.env.DB_PORT
-const DB_NAME = process.env.DB_NAME
-const DB_USER = process.env.DB_USER
-const DB_PASSWORD = process.env.DB_PASSWORD
-
 const models = {}
 
 module.exports = {
@@ -24,7 +18,7 @@ async function setup () {
   setupConnection()
   await testConnection()
   setupModels()
-  if (process.env.MIGRATE_DB) {
+  if (process.env.MIGRATION) {
     await runMigrations()
   }
   console.log('Synchronizing models...')
@@ -32,9 +26,7 @@ async function setup () {
 }
 
 function setupConnection () {
-  const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-    host: DB_HOST,
-    port: DB_PORT,
+  const sequelize = new Sequelize(process.env.DB_URI, {
     dialect: 'postgres',
     logging: false,
     quoteIdentifiers: false,
@@ -49,7 +41,7 @@ function setupConnection () {
 async function testConnection () {
   try {
     await sequelize.authenticate()
-    console.log(`Connected to Postgres [${DB_HOST}]`)
+    console.log(`Connected to Postgres [${sequelize.options.host}]`)
   } catch (e) {
     console.error('[ERROR] Unable to connect to the database:', e.message)
     process.exit(1)
@@ -64,8 +56,6 @@ function setupModels () {
 
     setupModel(modelName, sequelize.import(`${core.dirs.models}/${model}`))
   }
-
-  // setup models associations
   require('./associations')(models)
 }
 
@@ -86,6 +76,5 @@ async function runMigrations () {
     }
   })
   await umzug.up()
-
   return Promise.resolve(true)
 }

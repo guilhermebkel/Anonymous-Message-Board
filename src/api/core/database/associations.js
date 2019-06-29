@@ -43,7 +43,6 @@ module.exports = (models) => {
   associateAndGlobalize(models)
 
   for (let association of associations) {
-    // From.belongsTo(To, {as: 'Tos'})
     association.from[association.relation](association.to, association.options)
   }
 }
