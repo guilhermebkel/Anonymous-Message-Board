@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/
+    docker:
+      - image: circleci/node:4.8.2 
+      - image: pg:7.11.0
+    steps:
+      - checkout 
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: api
+          command: npm run server
+      - run:
+          name: client
+          command: npm start
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results: 
+          path: test-results.xml
