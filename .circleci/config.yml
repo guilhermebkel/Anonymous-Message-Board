@@ -1,12 +1,14 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/
+    working_directory: ~/project
     docker:
-      - image: circleci/node:4.8.2 
-      - image: pg:7.11.0
+      - image: circleci/node:latest
     steps:
-      - checkout 
+      - checkout
+      - run:
+          name: env-variables
+          command: echo 'export MIGRATION="false"' >> $BASH_ENV
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -21,10 +23,10 @@ jobs:
             - ./node_modules
       - run:
           name: api
-          command: npm run server
+          command: npm run test
       - run:
           name: client
-          command: npm start
+          command: npm run build
       - store_artifacts:
           path: test-results.xml
           prefix: tests
