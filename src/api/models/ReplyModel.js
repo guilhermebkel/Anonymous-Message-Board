@@ -1,40 +1,36 @@
-const Sequelize = require('sequelize');
-
-const ReplySchema = {
-    name: 'replies',
-    schema: {
-        id: {
-            type: Sequelize.INTEGER,
-            required: true,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        thread_id: {
-            type: Sequelize.INTEGER,
-            required: true,
-        },
-        text: {
-            type: Sequelize.STRING,
-            required: true,
-        },
-        created_on: {
-            type: Sequelize.DATE,
-            required: true,
-        },
-        reported: {
-            type: Sequelize.BOOLEAN,
-            default: false,
-        },
-        delete_password: {
-            type: Sequelize.STRING,
-            required: true,
-        },
+module.exports = function (sequelize, DataTypes) {
+  return sequelize.define('replies', {
+    id: {
+      type: DataTypes.INTEGER,
+      required: true,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    options: {
-        tableName: 'TB_REPLIES',
-        freeTableName: false,
-        timestamps: false,
-    }
+    thread_id: {
+      type: DataTypes.INTEGER,
+      required: true,
+      references: {
+        model: 'threads',
+        key: 'id'
+      }
+    },
+    text: {
+      type: DataTypes.STRING,
+      required: true,
+    },
+    created_on: {
+      type: DataTypes.DATE,
+      required: true,
+    },
+    reported: {
+      type: DataTypes.BOOLEAN,
+      default: false,
+    },
+    delete_password: {
+      type: DataTypes.STRING,
+      required: true,
+    },
+  }, {
+      tableName: 'replies',
+    })
 }
-
-module.exports = ReplySchema;

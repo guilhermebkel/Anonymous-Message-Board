@@ -1,4 +1,9 @@
-module.exports = function (server) {
+module.exports = {
+    cors,
+    helmet
+}
+
+async function cors(server){
     server.on('MethodNotAllowed', unknownMethodHandler);
     function unknownMethodHandler(req, res) {
         if (req.method.toLowerCase() === 'options') {
@@ -17,4 +22,20 @@ module.exports = function (server) {
         else
             return res.send(new restify.MethodNotAllowedError());
     }
+}
+
+async function helmet(server){
+    server.use(
+        helmet({
+            frameguard: {              
+                action: 'deny'
+            },
+            contentSecurityPolicy: {   
+                directives: {
+                    defaultSrc: ["'self'"],
+                    styleSrc: ['style.com'],
+                }
+            },
+            dnsPrefetchControl: false
+        }))
 }

@@ -1,24 +1,16 @@
-const Sequelize = require('sequelize');
-
-const BoardSchema = {
-    name: 'boards',
-    schema: {
-        id: {
-            type: Sequelize.INTEGER,
-            required: true,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        threads: {
-            type: Sequelize.ARRAY,
-            default: []
-        }
+module.exports = function (sequelize, DataTypes) {
+  return sequelize.define('boards', {
+    id: {
+      type: DataTypes.INTEGER,
+      required: true,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    options: {
-        tableName: 'TB_BOARDS',
-        freeTableName: false,
-        timestamps: false,
-    }
+    threads: {
+      type: DataTypes.JSONB,
+      default: []
+    },
+  }, {
+      tableName: 'boards',
+    })
 }
-
-module.exports = BoardSchema;
