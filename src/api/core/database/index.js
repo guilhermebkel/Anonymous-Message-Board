@@ -10,7 +10,7 @@ module.exports = {
   setup
 }
 
-async function setup () {
+async function setup (){
   global.Sequelize = Sequelize
   setupConnection()
   await testConnection()
