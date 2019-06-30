@@ -1,16 +1,13 @@
-const BoardModel = require('../models/BoardModel')
+const DataTypes = require('sequelize')
+
+const BoardModel = require('../models/BoardModel')(sequelize, DataTypes)
 
 module.exports = {
   getBoards,
 }
 
 async function getBoards(req, res) {
-  BoardModel.findAll({}, (error, data) => {
-    if (data) {
-      res.json(data)
-    }
-    else {
-      console.error(error)
-    }
-  })
+  BoardModel.findAll({})
+  .then(users => res.json(users))
+  .catch(error => console.error(error))
 }
