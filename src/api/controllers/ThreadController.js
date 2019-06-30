@@ -4,18 +4,29 @@ const ThreadModel = require('../models/ThreadModel')(sequelize, DataTypes)
 
 module.exports = {
     createThread,
+    getThreadByBoardId,
     getAllThreads,
     deleteThread,
     updateThread,
 }
 
 async function createThread(req, res){
-    ThreadModel.create(req.body)
-    .then(thread => res.json(thread))
+    BoardModel.create({})
+    .then(board => {
+        ThreadModel.create(req.body, { board_id: board.id })
+        .then(thread => res.json(thread))
+        .catch(error => console.error(error))
+    })
     .catch(error => console.error(error))
 }
 
 async function getAllThreads(req, res){
+    ThreadModel.findAll({})
+    .then(threads => res.json(threads))
+    .catch(error => console.error(error))
+}
+
+async function getThreadByBoardId(req, res){
     ThreadModel.findAll({board_id: req.params.board_id})
     .then(thread => res.json(thread))
     .catch(error => console.error(error))
