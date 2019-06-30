@@ -19,4 +19,5 @@ async function setup (){
   server.get("/", (req, res) => {
       res.json({"status": "Express server is running!"})
   })
+  global.server = server
 }

@@ -16,7 +16,11 @@ module.exports = {
 async function boot() {
   require('dotenv').config()
   await require('./database').setup()
-  require('./server').setup()
+  await require('./server').setup()
+
+  if(process.env.NODE_ENV === 'development'){
+    require('./tests').setup(server)
+  }
 }
 
 boot();
