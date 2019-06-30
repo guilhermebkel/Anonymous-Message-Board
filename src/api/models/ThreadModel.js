@@ -19,11 +19,11 @@ module.exports = function (sequelize, DataTypes) {
     },
     created_on: {
       type: DataTypes.DATE,
-      required: true,
     },
     bumped_on: {
       type: DataTypes.DATE,
       allowNull: true,
+      default: null,
     },
     reported: {
       type: DataTypes.BOOLEAN,

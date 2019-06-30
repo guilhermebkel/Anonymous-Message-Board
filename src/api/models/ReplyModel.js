@@ -20,7 +20,6 @@ module.exports = function (sequelize, DataTypes) {
     },
     created_on: {
       type: DataTypes.DATE,
-      required: true,
     },
     reported: {
       type: DataTypes.BOOLEAN,
