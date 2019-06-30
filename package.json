@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "node src/api/core/index.js",
-    "mocha": "cross-env NODE_ENV=development mocha src/api/core/index.js",
+    "dev": "node src/api/core/index.js",
+    "test": "cross-env NODE_ENV=development mocha src/api/core/index.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "server": "nodemon src/api/core/index.js"

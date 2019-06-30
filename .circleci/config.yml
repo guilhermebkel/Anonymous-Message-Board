@@ -23,7 +23,7 @@ jobs:
             - ./node_modules
       - run:
           name: api
-          command: npm run test
+          command: npm run dev
       - run:
           name: client
           command: npm run build
