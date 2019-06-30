@@ -1,9 +1,14 @@
-const express = require('express');
-const routes = express.Router();
+const express = require('express')
+const routes = express.Router()
 
-const ThreadController = require('../controllers/ThreadController');
+const ThreadController = require('../controllers/ThreadController')
 
-routes.post('/threads', ThreadController.createThread);
-routes.get('/threads/:board_id', ThreadController.getAllThreads);
-routes.delete('/threads', ThreadController.deleteThread);
-routes.put('/threads', ThreadController.updateThread);
+module.exports = {
+    config(app){
+        app.post('/threads', ThreadController.createThread)
+        app.get('/threads', ThreadController.getAllThreads)
+        app.get('/threads/:board_id', ThreadController.getThreadByBoardId)
+        app.delete('/threads', ThreadController.deleteThread)
+        app.put('/threads', ThreadController.updateThread)
+    }
+}
