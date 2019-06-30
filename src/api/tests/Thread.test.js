@@ -1,20 +1,8 @@
 const assert = require('assert')
+const { THREAD, THREAD_CHANGE } = require('../core/tests/models')
 
 module.exports = {
     test
-}
-
-const THREAD = {
-    id: 100,
-    board_id: 120,
-    text: 'TESTE',
-    bumped_on: null,
-    delete_password: '123',
-}
-
-const THREAD_CHANGE = {
-    thread_id: THREAD.id,
-    delete_password: THREAD.delete_password,
 }
 
 async function test(server){
