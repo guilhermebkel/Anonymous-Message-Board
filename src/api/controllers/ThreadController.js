@@ -22,7 +22,7 @@ async function getAllThreads(req, res){
 }
 
 async function deleteThread(req, res){
-    ThreadModel.find({id: req.body.thread_id, delete_password: req.body.delete_password})
+    await ThreadModel.find({id: req.body.thread_id, delete_password: req.body.delete_password})
     .then(thread => res.json(thread))
     .catch(error => console.error(error))
 

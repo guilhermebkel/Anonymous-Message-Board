@@ -37,7 +37,7 @@ async function deleteReply(req, res) {
 }
 
 async function updateReply(req, res) {
-  ReplyModel.find({ thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password })
+  await ReplyModel.find({ thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password })
   .then(reply => res.json(reply))
   .catch(error => console.error(error))
 

@@ -4,10 +4,17 @@ const BoardModel = require('../models/BoardModel')(sequelize, DataTypes)
 
 module.exports = {
   getBoards,
+  createBoard,
 }
 
-async function getBoards(req, res) {
+async function getBoards(req, res){
   BoardModel.findAll({})
-  .then(users => res.json(users))
+  .then(boards => res.json(boards))
+  .catch(error => console.error(error))
+}
+
+async function createBoard(req, res){
+  BoardModel.create(req.body)
+  .then(boards => res.json(boards))
   .catch(error => console.error(error))
 }
