@@ -6,6 +6,5 @@ const BoardController = require('../controllers/BoardController')
 module.exports = {
     config(app){
         app.get('/boards', BoardController.getBoards)
-        app.post('/boards', BoardController.createBoard)
     }
 }
