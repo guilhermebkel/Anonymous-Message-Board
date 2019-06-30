@@ -1,10 +1,11 @@
-const express = require('express');
-const routes = express.Router();
+const express = require('express')
+const routes = express.Router()
 
-const BoardController = require('../controllers/BoardController');
+const BoardController = require('../controllers/BoardController')
 
 module.exports = {
     config(app){
-        app.get('/boards', BoardController.getBoards);
+        app.get('/boards', BoardController.getBoards)
+        app.post('/boards', BoardController.createBoard)
     }
 }
