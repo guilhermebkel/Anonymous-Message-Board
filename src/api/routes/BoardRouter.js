@@ -3,4 +3,8 @@ const routes = express.Router();
 
 const BoardController = require('../controllers/BoardController');
 
-routes.get('/boards', BoardController.getBoards);
+module.exports = {
+    config(app){
+        app.get('/boards', BoardController.getBoards);
+    }
+}

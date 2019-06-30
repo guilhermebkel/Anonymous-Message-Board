@@ -3,7 +3,11 @@ const routes = express.Router();
 
 const ReplyController = require('../controllers/ReplyController');
 
-routes.post('/replies/:thread_id', ReplyController.createReply);
-routes.get('/replies/:thread_id', ReplyController.getRepliesByThreadId);
-routes.delete('/replies', ReplyController.deleteReply);
-routes.put('/replies', ReplyController.updateReply);
+module.exports = {
+    config(app){
+        app.post('/replies/:thread_id', ReplyController.createReply);
+        app.get('/replies/:thread_id', ReplyController.getRepliesByThreadId);
+        app.delete('/replies', ReplyController.deleteReply);
+        app.put('/replies', ReplyController.updateReply);
+    }
+}
