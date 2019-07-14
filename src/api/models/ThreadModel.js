@@ -19,6 +19,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     created_on: {
       type: DataTypes.DATE,
+      default: new Date,
     },
     bumped_on: {
       type: DataTypes.DATE,
