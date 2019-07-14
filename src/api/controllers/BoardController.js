@@ -7,7 +7,11 @@ module.exports = {
 }
 
 async function getBoards(req, res){
-  BoardModel.findAll({})
-  .then(boards => res.json(boards))
-  .catch(error => console.error(error))
+  try {
+    const boards = await BoardModel.findAll({})
+    res.json(boards)
+  }
+  catch(error){
+    console.error(error)
+  }
 }
