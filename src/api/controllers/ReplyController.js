@@ -13,7 +13,7 @@ module.exports = {
 async function createReply(req, res) {
   try{
     const newReply = await ReplyModel.create(req.body)
-    await ThreadModel.updateById({ bumped_on: new Date }, { where: { id: req.params.thread_id }})
+    await ThreadModel.update({ bumped_on: new Date }, { where: { id: req.params.thread_id }})
     res.json(newReply)
   }
   catch(error){
