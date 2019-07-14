@@ -11,37 +11,44 @@ module.exports = {
 }
 
 async function createReply(req, res) {
-  await ReplyModel.create(req.body)
-  .then(reply => res.json(reply))
-  .catch(error => console.error(error))
-
-  ThreadModel.updateById(req.params.thread_id, { bumped_on: new Date })
-  .then(thread => res.json(thread))
-  .catch(error => console.error(error))
+  try{
+    const newReply = await ReplyModel.create(req.body)
+    await ThreadModel.update({ bumped_on: new Date }, { where: { id: req.params.thread_id }})
+    res.json(newReply)
+  }
+  catch(error){
+    console.error(error)
+  }
 }
 
 async function getRepliesByThreadId(req, res) {
-  ReplyModel.findAll({ thread_id: req.params.thread_id })
-  .then(reply => res.json(reply))
-  .catch(error => console.error(error))
+  try{
+    const replies = await ReplyModel.findAll({ where: { thread_id: req.params.thread_id }})
+    res.json(replies)
+  }
+  catch(error){
+    console.error(error)
+  }
 }
 
 async function deleteReply(req, res) {
-  await ReplyModel.find({ thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password })
-  .then(reply => res.json(reply))
-  .catch(error => console.error(error))
-
-  ReplyModel.deleteById(req.params.reply_id)
-    .then(reply => res.json(reply))
-    .catch(error => console.error(error))
+  try{
+    await ReplyModel.destroy({ where: { thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password }})
+    res.status(200)
+    res.send('Deleted!')
+  }
+  catch(error){
+    console.error(error)
+  }
 }
 
 async function updateReply(req, res) {
-  await ReplyModel.find({ thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password })
-  .then(reply => res.json(reply))
-  .catch(error => console.error(error))
-
-  ReplyModel.updateById(req.body.thread_id, { reported: true })
-  .then(reply => res.json(reply))
-  .catch(error => console.error(error)) 
+  try{
+    await ReplyModel.update({ reported: true }, { where: { thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password }})
+    res.status(200)
+    res.send('Updated!')
+  }
+  catch(error){
+    console.error(error)
+  }
 }
