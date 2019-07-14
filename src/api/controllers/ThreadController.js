@@ -55,7 +55,7 @@ async function deleteThread(req, res){
 
 async function updateThread(req, res){
     try{
-        await ThreadModel.update({ reported: true }, { where: { id: req.body.thread_id }}, )
+        await ThreadModel.update({ reported: true }, { where: { id: req.body.thread_id }})
         res.status(200)
         res.send('Updated!')
     }
