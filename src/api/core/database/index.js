@@ -9,8 +9,8 @@ async function setup (){
   await connect()
 
   console.log('Testing database connection...')
-  await testConnection()
-  
+  await status()
+
   console.log('Synchronizing models...')
   await sequelize.sync()
 }
@@ -28,7 +28,7 @@ function connect(){
   global.sequelize = sequelize
 }
 
-async function testConnection(){
+async function status(){
   try {
     await sequelize.authenticate()
     console.log(`Connected to Postgres [${sequelize.options.host}]`)
