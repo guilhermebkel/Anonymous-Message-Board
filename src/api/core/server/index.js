@@ -8,14 +8,21 @@ module.exports = {
 }
 
 async function setup (){
+  console.log('=> Setting up server')
+
   console.log('Activating cors...')
   await cors(server)
-  console.log('Setting up security methods...')
+
+  console.log('Initializing security methods...')
   await security(server)
-  server.listen(process.env.PORT, () => {
-      console.log(`- Server running [PORT ${process.env.PORT}]`)
-  });
+
+  console.log('Activating routes...')
   routes(server)
+
+  server.listen(process.env.PORT, () => {
+      console.log(`Server running [PORT ${process.env.PORT}]`)
+  });
+
   server.get("/", (req, res) => {
       res.json({"status": "Express server is running!"})
   })

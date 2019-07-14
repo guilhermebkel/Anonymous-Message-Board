@@ -1,28 +1,21 @@
-const fs = require('fs')
 const Sequelize = require('sequelize')
-const Umzug = require('umzug')
-
-const core = require('../../core')
-
-const models = {}
 
 module.exports = {
   setup
 }
 
 async function setup (){
-  global.Sequelize = Sequelize
-  setupConnection()
+  console.log('=> Connecting to database')
+  await connect()
+
+  console.log('Testing database connection...')
   await testConnection()
-  setupModels()
-  if (process.env.MIGRATION) {
-    await runMigrations()
-  }
+  
   console.log('Synchronizing models...')
   await sequelize.sync()
 }
 
-function setupConnection () {
+function connect(){
   const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     logging: false,
@@ -35,43 +28,12 @@ function setupConnection () {
   global.sequelize = sequelize
 }
 
-async function testConnection () {
+async function testConnection(){
   try {
     await sequelize.authenticate()
-    console.log(`- Connected to Postgres [${sequelize.options.host}]`)
-  } catch (e) {
-    console.error('[ERROR] Unable to connect to the database:', e.message)
-    process.exit(1)
+    console.log(`Connected to Postgres [${sequelize.options.host}]`)
+  } 
+  catch(error) {
+    console.error(error)
   }
-}
-
-function setupModels () {
-  const modelList = fs.readdirSync(core.dirs.models)
-  for (const model of modelList) {
-    if (model.startsWith('_') || model.startsWith('index')) continue
-    const modelName = model.split('.').shift()
-
-    setupModel(modelName, sequelize.import(`${core.dirs.models}/${model}`))
-  }
-  require('./associations')(models)
-}
-
-async function setupModel (modelName, modelObj) {
-  models[modelName] = modelObj
-}
-
-async function runMigrations () {
-  console.log('Running migrations...')
-  const umzug = new Umzug({
-    storage: 'sequelize',
-    storageOptions: {
-      sequelize
-    },
-    migrations: {
-      params: [sequelize.getQueryInterface(), Sequelize],
-      path: `${core.dirs.root}/src/db/migrations`
-    }
-  })
-  await umzug.up()
-  return Promise.resolve(true)
 }

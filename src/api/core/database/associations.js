@@ -39,21 +39,4 @@ module.exports = (models) => {
       }
     }
   ]
-
-  associateAndGlobalize(models)
-
-  for (let association of associations) {
-    association.from[association.relation](association.to, association.options)
-  }
-}
-
-function associateAndGlobalize(models) {
-  Object
-    .keys(models)
-    .forEach((modelName) => {
-      if (models[modelName].associate) {
-        models[modelName].associate(models)
-      }
-      global[modelName] = models[modelName]
-    })
 }
