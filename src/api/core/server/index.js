@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const { cors, security } = require('./middlewares')
 const routes = require('./routes')
 const server = express()
@@ -9,6 +10,8 @@ module.exports = {
 
 async function setup (){
   console.log('=> Setting up server')
+  server.use(bodyParser.urlencoded({ extended: 'false' }));
+  server.use(bodyParser.json());
 
   console.log('Activating cors...')
   await cors(server)

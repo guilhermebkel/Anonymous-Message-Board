@@ -1,6 +1,7 @@
 const DataTypes = require('sequelize')
 
 const ThreadModel = require('../models/ThreadModel')(sequelize, DataTypes)
+const BoardModel = require('../models/BoardModel')(sequelize, DataTypes)
 
 module.exports = {
     createThread,
@@ -13,7 +14,10 @@ module.exports = {
 async function createThread(req, res){
     BoardModel.create({})
     .then(board => {
-        ThreadModel.create(req.body, { board_id: board.id })
+        ThreadModel.create({
+            ...req.body,
+            board_id: board.dataValues.id 
+        })
         .then(thread => res.json(thread))
         .catch(error => console.error(error))
     })
