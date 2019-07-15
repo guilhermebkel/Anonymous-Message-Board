@@ -1,60 +1,65 @@
+const fetch = require('node-fetch')
 const assert = require('assert')
-const { REPLY, REPLY_CHANGE, THREAD } = require('../core/tests/models')
+
+const REPLY = {
+    id: 300,
+    text: 'TESTE',
+    delete_password: '123',
+}
+
+const THREAD = {
+    id: null,
+    board_id: 120,
+    text: 'TESTE',
+    bumped_on: null,
+    delete_password: '123',
+}
+
+const REPLY_CHANGE = {
+    thread_id: THREAD.id,
+    reply_id: REPLY.id,
+    delete_password: REPLY.delete_password
+}
 
 module.exports = {
     test
 }
 
-async function test(server){
+async function test(){
     describe('Reply Tests', function() {
     
         this.timeout(Infinity)
     
-        this.beforeAll(async () => {
-            app = await server
-        })
-    
         it('[POST] /replies/:thread_id - Create reply', async () => {
-            const result = await app.inject({
+            const result = await fetch(`${process.env.LOCAL_HOST}/replies/20`, { 
                 method: 'POST',
-                headers,
-                url: `/replies/${THREAD.id}`,
-                payload: JSON.stringify(REPLY)
+                body: JSON.stringify(REPLY),
+                headers: { 'Content-Type': 'application/json' },
             })
-            const statusCode = result.statusCode
-            assert.deepEqual(statusCode, 200)    
+            assert.deepEqual(result.status, 200)
         })
     
         it('[GET] /replies/:thread_id - Get replies by thread id', async () => {
-            const result = await app.inject({
-                method: 'GET',
-                headers,
-                url: `/replies/${THREAD.id}`,
-            })
-            const statusCode = result.statusCode
-            assert.deepEqual(statusCode, 200)
+            const result = await fetch(`${process.env.LOCAL_HOST}/replies/20`, { method: 'GET' })
+            assert.deepEqual(result.status, 200)
         })
         
         it('[UPDATE] /replies - Update reply status by thread id reply id and password', async () => {
-            const result = await app.inject({
+            const result = await fetch(`${process.env.LOCAL_HOST}/replies`, { 
                 method: 'PUT',
-                headers,
-                url: '/replies',
-                payload: JSON.stringify(REPLY_CHANGE),
+                body: JSON.stringify(REPLY_CHANGE),
+                headers: { 'Content-Type': 'application/json' },
             })
-            const statusCode = result.statusCode
-            assert.deepEqual(statusCode, 200)
+            assert.deepEqual(result.status, 200)
         })
 
         it('[DELETE] /replies - Delete reply by thread id reply id and password', async () => {
-            const result = await app.inject({
+            const result = await fetch(`${process.env.LOCAL_HOST}/replies`, { 
                 method: 'DELETE',
-                headers,
-                url: '/replies',
-                payload: JSON.stringify(REPLY_CHANGE),
+                body: JSON.stringify(REPLY_CHANGE),
+                headers: { 'Content-Type': 'application/json' },
             })
-            const statusCode = result.statusCode
-            assert.deepEqual(statusCode, 200)
+            assert.deepEqual(result.status, 200)
         }) 
     })
 }

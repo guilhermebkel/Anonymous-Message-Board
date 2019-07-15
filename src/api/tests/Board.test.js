@@ -1,29 +1,18 @@
+const fetch = require('node-fetch')
 const assert = require('assert')
 
 module.exports = {
     test
 }
 
-async function test(server){
+async function test(){
     describe('Board Tests', function() {
     
         this.timeout(Infinity)
     
-        this.beforeAll(async () => {
-            app = await server
-        })
-    
         it('[GET] /boards - Get all boards', async () => {
-            const result = await app.inject({
-                method: 'GET',
-                headers,
-                url: '/boards',
-            })
-            const dados = JSON.parse(result.payload)
-            const statusCode = result.statusCode
-            assert.deepEqual(statusCode, 200)
-            assert.ok(Array.isArray(dados))
-            
+            const result = await fetch(`${process.env.LOCAL_HOST}/boards`, { method: 'GET' })
+            assert.deepEqual(result.status, 200) 
         })
     })
 }
