@@ -17,10 +17,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       required: true,
     },
-    created_on: {
-      type: DataTypes.DATE,
-      default: new Date,
-    },
     bumped_on: {
       type: DataTypes.DATE,
       allowNull: true,
