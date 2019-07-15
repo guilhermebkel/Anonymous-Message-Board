@@ -1,4 +1,6 @@
 const DataTypes = require('sequelize')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 const ThreadModel = require('../models/ThreadModel')(sequelize, DataTypes)
 const BoardModel = require('../models/BoardModel')(sequelize, DataTypes)
@@ -13,9 +15,16 @@ module.exports = {
 
 async function createThread(req, res){
     try{
-        const newBoard = await BoardModel.create({})
-        const newThread = await ThreadModel.create({ ...req.body, board_id: newBoard.dataValues.id })
-        res.json(newThread)
+        await bcrypt.hash(req.body.delete_password, saltRounds, async (error, hash) => {
+            if(hash){
+                const newBoard = await BoardModel.create({})
+                const newThread = await ThreadModel.create({ ...req.body, board_id: newBoard.dataValues.id, delete_password: hash })
+                res.json(newThread)
+            }
+            else{
+                console.error(error)
+            }
+        })
     }
     catch(error){
         console.error(error)
@@ -44,9 +53,18 @@ async function getThreadByBoardId(req, res){
 
 async function deleteThread(req, res){
     try{
-        await ThreadModel.destroy({ where: { id: req.body.thread_id, delete_password: req.body.delete_password }})
-        res.status(200)
-        res.send('Deleted!')
+        const thread = await ThreadModel.findOne({ where: { id: req.body.thread_id }})
+        bcrypt.compare(req.body.delete_password, thread.dataValues.delete_password, async (error, result) => {
+            if(result){
+                await ThreadModel.destroy({ where: { id: req.body.thread_id }})
+                res.status(200)
+                res.send('Deleted!')
+            }
+            else{
+                res.status(400)
+                res.send('Incorrect password!')
+            }
+        })     
     }
     catch(error){
         console.error(error)
