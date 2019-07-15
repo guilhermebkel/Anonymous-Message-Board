@@ -1,7 +1,7 @@
-module.exports = {
-    setup(server){
-        require('../../tests/Thread.test').test(server)
-        require('../../tests/Reply.test.js').test(server)
-        require('../../tests/Boards.test.js').test(server)
-    }
+async function start(){
+    await require('../../tests/Thread.test').test()
+    await require('../../tests/Reply.test').test()
+    await require('../../tests/Board.test').test()
 }
+
+start()

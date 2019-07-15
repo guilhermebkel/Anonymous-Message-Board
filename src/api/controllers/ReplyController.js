@@ -33,7 +33,7 @@ async function getRepliesByThreadId(req, res) {
 
 async function deleteReply(req, res) {
   try{
-    await ReplyModel.destroy({ where: { thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password }})
+    await ReplyModel.destroy({ where: { id: req.body.reply_id, thread_id: req.body.thread_id, delete_password: req.body.delete_password }})
     res.status(200)
     res.send('Deleted!')
   }
@@ -44,7 +44,7 @@ async function deleteReply(req, res) {
 
 async function updateReply(req, res) {
   try{
-    await ReplyModel.update({ reported: true }, { where: { thread_id: req.body.thread_id, reply_id: req.body.reply_id, delete_password: req.body.delete_password }})
+    await ReplyModel.update({ reported: true }, { where: { id: req.body.reply_id, thread_id: req.body.thread_id, delete_password: req.body.delete_password }})
     res.status(200)
     res.send('Updated!')
   }
