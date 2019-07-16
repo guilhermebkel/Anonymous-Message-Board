@@ -9,7 +9,8 @@
     "test": "cross-env NODE_ENV=development mocha src/api/core/tests/index.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "cross-env NODE_ENV=production nodemon src/api/core/index.js"
+    "server": "cross-env NODE_ENV=production nodemon src/api/core/index.js",
+    "deploy": "ng build --prod && firebase deploy"
   },
   "private": true,
   "dependencies": {
