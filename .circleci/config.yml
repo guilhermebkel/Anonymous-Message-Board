@@ -10,7 +10,7 @@ jobs:
           name: node-env
           command: echo 'export NODE_ENV="production"' >> $BASH_ENV
       - run:
-          name: close
+          name: close-env
           command: echo 'export CLOSE="true"' >> $BASH_ENV    
       - run:
           name: update-npm
@@ -29,7 +29,7 @@ jobs:
           command: npm run dev
       - run:
           name: client
-          command: npm run build
+          command: sudo npm run build
       - store_artifacts:
           path: test-results.xml
           prefix: tests
