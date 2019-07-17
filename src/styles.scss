@@ -3,7 +3,10 @@
 body { 
     margin: 0;
     padding: 0;
-    display: flex;
+    width: 100vw;
+    height: auto;
+    text-align: center;
+    display: inline-block !important;
     background-color: #FFF;
     overflow: hidden !important;
     font-family: 'Roboto Mono', sans-serif !important;
