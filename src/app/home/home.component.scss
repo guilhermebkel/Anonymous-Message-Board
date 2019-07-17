@@ -19,7 +19,7 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            margin: 50px auto auto auto;
+            margin: 60px auto auto auto;
         
             img {
                 width: 100px;
@@ -47,4 +47,95 @@
     width: 300px;
     padding-left: 15px;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.board{
+    z-index: 11;
+    width: 320px;
+    height: auto;
+    background-color: #651fff;
+    margin: 20px auto 0 auto;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+
+    h1 {
+        font-size: 16px;
+        margin: 0;
+        padding-top: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: left;
+        color: #FFF;
+    }
+    section {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px 0 10px 0;
+
+        strong {
+            left: 0;
+            padding-left: 15px;
+            font-size: 13px; 
+            font-weight: lighter !important;
+            color: #FFF;
+            opacity: 0.8;
+        }
+        h2 {
+            font-size: 13px; 
+            margin: auto 0 auto auto;
+            padding-right: 15px;
+            font-weight: lighter !important;
+            color: #FFF;
+            opacity: 0.8;
+        }
+    }
+}
+.board:hover{
+    transform: scale(1.05);
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+
+.create{
+    position: fixed;
+    z-index: 11;
+    outline: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border-style: outset;
+    background-color: rgb(70, 70, 70);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    border-width: 0px;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    display: flex;
+    align-content: space-around;
+    opacity: 0.7;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+
+    img {
+        width: 23px;
+        height: 23px;
+        margin: auto;
+    }
+}
+.create:hover{
+    opacity: 1;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
 }
