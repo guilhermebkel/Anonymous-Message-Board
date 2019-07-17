@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm link @angular/cli -y && ng build",
+    "build": "ng build",
     "dev": "node src/api/core/index.js",
     "test": "cross-env NODE_ENV=development mocha src/api/core/tests/index.js",
     "lint": "ng lint",

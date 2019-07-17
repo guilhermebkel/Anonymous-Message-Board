@@ -15,6 +15,9 @@ jobs:
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install-angular-globally
+          command: 'sudo npm install angular-cli@latest -g'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
