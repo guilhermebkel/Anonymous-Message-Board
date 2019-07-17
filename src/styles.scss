@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+body { 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #FFF;
+    overflow: hidden !important;
+    font-family: 'Roboto Mono', sans-serif !important;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased !important;
+}
