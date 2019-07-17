@@ -139,3 +139,102 @@
     -o-transition: all 0.25s ease;
     transition: all 0.25s ease;
 }
+
+.creation-background{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+
+    .creation-menu{
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        z-index: 11;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 300px;
+        background-color: #FFF;
+        border-radius: 5px;
+        -webkit-transition: all 0.25s ease;
+        -moz-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+
+        input{
+            font-family: 'Roboto Mono', sans-serif !important;
+            outline: none;
+            width: 85%;
+            margin: 15px auto 15px 15px;
+            height: 35px;
+            background-color: #000;
+            border-width: 0px;
+            border-radius: 5px;
+            color: white;
+            padding-left: 15px;
+        }
+
+        .button-container{
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+
+            .close-button{
+                font-family: 'Roboto Mono', sans-serif !important;
+                background-color: #ff1744;
+                color: white;
+                outline: none;
+                border-width: 0;
+                border-radius: 5px;
+                padding: 5px 0;
+                width: 80px;
+                margin: 15px auto 5px 15px;
+                cursor: pointer;
+                -webkit-transition: all 0.25s ease;
+                -moz-transition: all 0.25s ease;
+                -o-transition: all 0.25s ease;
+                transition: all 0.25s ease;
+            }
+            .close-button:hover{
+                background-color: black;
+                -webkit-transition: all 0.25s ease;
+                -moz-transition: all 0.25s ease;
+                -o-transition: all 0.25s ease;
+                transition: all 0.25s ease;
+            }
+
+            .create-button{
+                font-family: 'Roboto Mono', sans-serif !important;
+                background-color: #00c853;
+                color: white;
+                outline: none;
+                border-width: 0;
+                border-radius: 5px;
+                padding: 5px 0;
+                width: 80px;
+                margin: 15px 15px 5px auto;
+                cursor: pointer;
+                -webkit-transition: all 0.25s ease;
+                -moz-transition: all 0.25s ease;
+                -o-transition: all 0.25s ease;
+                transition: all 0.25s ease;
+            }
+            .create-button:hover{
+                background-color: black;
+                -webkit-transition: all 0.25s ease;
+                -moz-transition: all 0.25s ease;
+                -o-transition: all 0.25s ease;
+                transition: all 0.25s ease;
+            }
+        }
+    }
+}
