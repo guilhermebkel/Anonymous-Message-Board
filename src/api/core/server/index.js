@@ -1,6 +1,7 @@
 const express = require('express')
+const cors = require('express')
 const bodyParser = require('body-parser');
-const { cors, security } = require('./middlewares')
+const { security } = require('./middlewares')
 const routes = require('./routes')
 const server = express()
 
@@ -14,7 +15,7 @@ async function setup (){
   server.use(bodyParser.json());
 
   console.log('Activating cors...')
-  await cors(server)
+  server.use(cors())
 
   console.log('Initializing security methods...')
   await security(server)
@@ -22,9 +23,10 @@ async function setup (){
   console.log('Activating routes...')
   routes(server)
 
-  server.listen(process.env.PORT, () => {
+  const app = server.listen(process.env.PORT, () => {
       console.log(`Server running [PORT ${process.env.PORT}]`)
   });
+  if (process.env.CLOSE) app.close() && console.log(`Server running [PORT ${process.env.PORT}]`)
 
   server.get("/", (req, res) => {
       res.json({"status": "Express server is running!"})
