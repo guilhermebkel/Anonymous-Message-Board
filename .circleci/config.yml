@@ -7,8 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: env-variables
+          name: node-env
           command: echo 'export NODE_ENV="production"' >> $BASH_ENV
+      - run:
+          name: close
+          command: echo 'export CLOSE="true"' >> $BASH_ENV    
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
