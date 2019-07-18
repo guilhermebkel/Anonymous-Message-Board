@@ -16,8 +16,8 @@ jobs:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
       - run:
-          name: dev dependencies
-          command: npm ci
+          name: update-npm-dev
+          command: 'sudo npm install --dev'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
