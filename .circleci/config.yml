@@ -18,8 +18,7 @@ jobs:
       - run:
           name: update-npm-dev
           command: 'sudo npm install --only=dev'
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      
       - run:
           name: install-npm-wee
           command: npm install
