@@ -18,6 +18,9 @@ jobs:
       - run:
           name: update-npm-dev
           command: 'sudo npm install --only=dev'
+      - run:
+          name: install-npm-wee
+          command: 'sudo npm install'
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
