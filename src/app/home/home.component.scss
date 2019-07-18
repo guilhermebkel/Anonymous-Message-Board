@@ -47,6 +47,7 @@
     width: 300px;
     padding-left: 15px;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto Mono', sans-serif !important;
 }
 
 .board{
@@ -140,6 +141,10 @@
     transition: all 0.25s ease;
 }
 
+@keyframes fade-in {
+    from { opacity: 0 }
+      to { opacity: 1 }
+}
 .creation-background{
     display: none;
     position: fixed;
@@ -149,10 +154,7 @@
     bottom: 0;
     background: rgba(0, 0, 0, 0.8);
     z-index: 10;
-    -webkit-transition: all 0.25s ease;
-    -moz-transition: all 0.25s ease;
-    -o-transition: all 0.25s ease;
-    transition: all 0.25s ease;
+    animation: fade-in 0.15s;
 
     .creation-menu{
         position: fixed;
@@ -165,10 +167,6 @@
         width: 300px;
         background-color: #FFF;
         border-radius: 5px;
-        -webkit-transition: all 0.25s ease;
-        -moz-transition: all 0.25s ease;
-        -o-transition: all 0.25s ease;
-        transition: all 0.25s ease;
 
         input{
             font-family: 'Roboto Mono', sans-serif !important;

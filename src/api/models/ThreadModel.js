@@ -8,6 +8,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     board_id: {
       type: DataTypes.INTEGER,
+      required: true,
       references: {
         model: 'boards',
         key: 'id'
@@ -34,6 +35,11 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.JSONB,
       default: [],
     },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      default: null,
+    }
   }, {
       tableName: 'threads',
     })

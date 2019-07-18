@@ -5,6 +5,7 @@ const assert = require('assert')
 const THREAD = {
     id: 100,
     text: 'TESTE',
+    board_id: 12,
     bumped_on: null,
     delete_password: '123',
 }

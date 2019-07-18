@@ -23,6 +23,11 @@ function connect(){
     ssl: true,
     dialectOptions: {
         ssl: true
+    },
+    define: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      timestamps: true,
     }
   })
   global.sequelize = sequelize

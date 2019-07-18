@@ -17,8 +17,10 @@ async function createThread(req, res){
     try{
         await bcrypt.hash(req.body.delete_password, saltRounds, async (error, hash) => {
             if(hash){
-                const newBoard = await BoardModel.create({})
-                const newThread = await ThreadModel.create({ ...req.body, board_id: newBoard.dataValues.id, delete_password: hash })
+                const newThread = await ThreadModel.create({ 
+                    ...req.body,
+                    delete_password: hash 
+                })
                 res.json(newThread)
             }
             else{
@@ -33,7 +35,12 @@ async function createThread(req, res){
 
 async function getAllThreads(req, res){
     try{
-        const threads = await ThreadModel.findAll({})
+        const threads = await ThreadModel.findAll({
+            order: [[ 'created_at', 'DESC' ]], 
+            where: { 
+              deleted_at: null
+            }
+          })
         res.json(threads)
     }
     catch(error){
@@ -43,7 +50,13 @@ async function getAllThreads(req, res){
 
 async function getThreadByBoardId(req, res){
     try{
-        const threads = await ThreadModel.findAll({ where: { board_id: req.params.board_id }})
+        const threads = await ThreadModel.findAll({
+            order: [[ 'created_at', 'DESC' ]], 
+            where: { 
+                board_id: req.params.board_id,
+                deleted_at: null
+            }
+        })
         res.json(threads)
     }
     catch(error){
@@ -56,7 +69,13 @@ async function deleteThread(req, res){
         const thread = await ThreadModel.findOne({ where: { id: req.body.thread_id }})
         bcrypt.compare(req.body.delete_password, thread.dataValues.delete_password, async (error, result) => {
             if(result){
-                await ThreadModel.destroy({ where: { id: req.body.thread_id }})
+                await ThreadModel.update({
+                    deleted_at: new Date
+                }, { 
+                    where: { 
+                        id: req.body.thread_id 
+                    }
+                })
                 res.status(200)
                 res.send('Deleted!')
             }
