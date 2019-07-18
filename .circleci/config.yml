@@ -13,6 +13,9 @@ jobs:
           name: close-env
           command: echo 'export CLOSE="true"' >> $BASH_ENV    
       - run:
+          name: Install angularcli
+          command: sudo npm install -g @angular/cli@latest
+      - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
       - run:
