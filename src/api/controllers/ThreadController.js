@@ -17,8 +17,7 @@ async function createThread(req, res){
     try{
         await bcrypt.hash(req.body.delete_password, saltRounds, async (error, hash) => {
             if(hash){
-                const newBoard = await BoardModel.create({})
-                const newThread = await ThreadModel.create({ ...req.body, board_id: newBoard.dataValues.id, delete_password: hash })
+                const newThread = await ThreadModel.create({ ...req.body, board_id: req.params.board_id, delete_password: hash })
                 res.json(newThread)
             }
             else{

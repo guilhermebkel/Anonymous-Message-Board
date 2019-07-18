@@ -28,8 +28,8 @@ async function test(){
             .then(() => done())
         })
     
-        it('[POST] /threads - Create thread', async () => {
-            const result = await fetch(`${process.env.LOCAL_HOST}/threads`, { 
+        it('[POST] /threads/:board_id - Create thread', async () => {
+            const result = await fetch(`${process.env.LOCAL_HOST}/threads/12`, { 
                 method: 'POST',
                 body: JSON.stringify(THREAD),
                 headers: { 'Content-Type': 'application/json' },

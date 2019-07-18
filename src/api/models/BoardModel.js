@@ -6,6 +6,10 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true,
     },
+    title: {
+      type: DataTypes.STRING,
+      required: true,
+    },
     threads: {
       type: DataTypes.JSONB,
       default: []
