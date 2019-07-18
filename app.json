@@ -1,0 +1,24 @@
+{
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "CLOSE": "true",
+    "DATABASE_URL": "postgres://asuvkjitnmsvig:d2e2eda2b507c7c03cdba16993fcc9fcf68c68b610c377863902722c3b28b7fa@ec2-23-21-91-183.compute-1.amazonaws.com:5432/d4mckkcajlj6f3"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "Anonymous-Message-Board",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
