@@ -1,4 +1,5 @@
 const DataTypes = require('sequelize')
+const Op = DataTypes.Op;
 
 const BoardModel = require('../models/BoardModel')(sequelize, DataTypes)
 
@@ -9,7 +10,12 @@ module.exports = {
 
 async function getBoards(req, res){
   try {
-    const boards = await BoardModel.findAll({order: [[ 'created_at', 'DESC' ]]})
+    const boards = await BoardModel.findAll({
+      order: [[ 'created_at', 'DESC' ]], 
+      where: { 
+        deleted_at: null
+      }
+    })
     res.json(boards)
   }
   catch(error){

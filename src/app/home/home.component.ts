@@ -21,14 +21,10 @@ export class HomeComponent implements OnInit {
     this.getBoards()
   }
 
-  async search(event) {
-    console.log(event)
-
+  async search(event){
     const word = (event.target.value || '').toLowerCase()
-
     this.boards = this.state.filter(filterList)
-
-    function filterList (board) {
+    function filterList(board){
       return board.title.toLowerCase().includes(word)
     }
   }

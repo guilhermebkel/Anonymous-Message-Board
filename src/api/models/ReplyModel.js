@@ -26,6 +26,11 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       required: true,
     },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      default: null,
+    }
   }, {
       tableName: 'replies',
     })

@@ -14,6 +14,11 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.JSONB,
       default: []
     },
+    deleted_at: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      default: null,
+    }
   }, {
       tableName: 'boards',
     })

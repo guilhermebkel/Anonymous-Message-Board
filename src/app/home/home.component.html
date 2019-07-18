@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<input class="search" placeholder="Search board" (keyup.enter)="search($event)"/>
+<input class="search" placeholder="Search board" (keyup)="search($event)"/>
 
 <section class="board" *ngFor="let board of boards">
   <h1>{{ board.title }}</h1>
