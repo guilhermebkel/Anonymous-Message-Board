@@ -9,7 +9,7 @@ module.exports = {
 
 async function getBoards(req, res){
   try {
-    const boards = await BoardModel.findAll({})
+    const boards = await BoardModel.findAll({order: [[ 'created_at', 'DESC' ]]})
     res.json(boards)
   }
   catch(error){

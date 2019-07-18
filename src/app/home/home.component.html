@@ -7,34 +7,13 @@
   </div>
 </div>
 
-<input class="search" placeholder="Search board" />
+<input class="search" placeholder="Search board" (keyup.enter)="search($event)"/>
 
-<section class="board">
-  <h1>How do you feel about it?</h1>
+<section class="board" *ngFor="let board of boards">
+  <h1>{{ board.title }}</h1>
   <section>
-    <strong>#4</strong>
-    <h2>17/07/2019</h2>
-  </section>
-</section>
-<section class="board">
-  <h1>What about the weather today?</h1>
-  <section>
-    <strong>#3</strong>
-    <h2>19/06/2019</h2>
-  </section>
-</section>
-<section class="board">
-  <h1>Do you like the anonymous board?</h1>
-  <section>
-    <strong>#2</strong>
-    <h2>18/07/2018</h2>
-  </section>
-</section>
-<section class="board">
-  <h1>What do you think would be good to improve this site?</h1>
-  <section>
-    <strong>#1</strong>
-    <h2>21/05/2018</h2>
+    <strong>#{{ board.id }}</strong>
+    <h2>{{ board.created_at | date:'dd/MM/yyyy'}}</h2>
   </section>
 </section>
 

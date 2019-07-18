@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ArrayType } from '@angular/compiler';
+import { Component, OnInit } from '@angular/core'
+import { BoardService } from '../../services/board.service'
 
 @Component({
   selector: 'app-home',
@@ -8,16 +8,36 @@ import { ArrayType } from '@angular/compiler';
 })
 export class HomeComponent implements OnInit {
 
-  state: []
+  boards: String[]
+  state: String[]
   isModalActive: Boolean
   isModalActiveStyle: {}
   isCreateButtonActiveStyle: {}
 
-  constructor() { }
+  constructor(private boardService: BoardService) {}
 
-  ngOnInit() {
-    this.isModalActive = false;
-    this.state = []
+  ngOnInit(){
+    this.isModalActive = false
+    this.getBoards()
+  }
+
+  async search(event) {
+    console.log(event)
+
+    const word = (event.target.value || '').toLowerCase()
+
+    this.boards = this.state.filter(filterList)
+
+    function filterList (board) {
+      return board.title.toLowerCase().includes(word)
+    }
+  }
+
+  async getBoards(){
+    await this.boardService.getBoards().subscribe(boards => {
+      this.state = boards
+      this.boards = boards
+    })
   }
 
   toggleCreationModal(){
