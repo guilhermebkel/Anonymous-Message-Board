@@ -1,5 +1,4 @@
 const DataTypes = require('sequelize')
-const Op = DataTypes.Op;
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
@@ -19,8 +18,7 @@ async function createThread(req, res){
         await bcrypt.hash(req.body.delete_password, saltRounds, async (error, hash) => {
             if(hash){
                 const newThread = await ThreadModel.create({ 
-                    ...req.body, 
-                    board_id: req.params.board_id, 
+                    ...req.body,
                     delete_password: hash 
                 })
                 res.json(newThread)

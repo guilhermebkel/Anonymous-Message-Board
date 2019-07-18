@@ -12,6 +12,6 @@ export class BoardService{
   constructor(private http: HttpClient) {}
 
   getBoards(): Observable<[]>{
-    return this.http.get<[]>(environment.local_api + '/boards')
+    return this.http.get<[]>(environment.online_api + '/boards')
   }
 }

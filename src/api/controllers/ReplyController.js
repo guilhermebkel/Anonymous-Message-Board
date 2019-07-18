@@ -1,5 +1,4 @@
 const DataTypes = require('sequelize')
-const Op = DataTypes.Op;
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 

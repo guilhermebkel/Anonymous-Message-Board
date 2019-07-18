@@ -5,6 +5,7 @@ const assert = require('assert')
 const THREAD = {
     id: 100,
     text: 'TESTE',
+    board_id: 12,
     bumped_on: null,
     delete_password: '123',
 }
@@ -28,8 +29,8 @@ async function test(){
             .then(() => done())
         })
     
-        it('[POST] /threads/:board_id - Create thread', async () => {
-            const result = await fetch(`${process.env.LOCAL_HOST}/threads/12`, { 
+        it('[POST] /threads - Create thread', async () => {
+            const result = await fetch(`${process.env.LOCAL_HOST}/threads`, { 
                 method: 'POST',
                 body: JSON.stringify(THREAD),
                 headers: { 'Content-Type': 'application/json' },

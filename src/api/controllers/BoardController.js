@@ -1,5 +1,4 @@
 const DataTypes = require('sequelize')
-const Op = DataTypes.Op;
 
 const BoardModel = require('../models/BoardModel')(sequelize, DataTypes)
 

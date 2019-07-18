@@ -8,6 +8,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     board_id: {
       type: DataTypes.INTEGER,
+      required: true,
       references: {
         model: 'boards',
         key: 'id'
