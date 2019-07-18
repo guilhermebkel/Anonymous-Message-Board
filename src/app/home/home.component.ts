@@ -8,20 +8,42 @@ import { BoardService } from '../../services/board.service'
 })
 export class HomeComponent implements OnInit {
 
-  boards: String[]
-  state: String[]
-  isModalActive: Boolean
+  boards: Object[] = []
+  state: Object[] = []
+  isModalActive: Boolean = false
   isModalActiveStyle: {}
   isCreateButtonActiveStyle: {}
+  newBoard: Object[] = []
+  newBoardTitle: String = ''
 
   constructor(private boardService: BoardService) {}
 
   ngOnInit(){
-    this.isModalActive = false
     this.getBoards()
   }
 
-  async search(event){
+  handleNewBoardTitle(event){
+    this.newBoardTitle = event.target.value
+  }
+
+  async createBoard(){
+    try{
+      await this.boardService.createBoard(
+        { title: this.newBoardTitle }
+      ).subscribe(board => {
+        this.newBoard = board
+        this.state.unshift(this.newBoard)
+    
+        this.toggleCreationModal()
+        this.newBoardTitle = ''
+      })
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
+  handleSearch(event){
     const word = (event.target.value || '').toLowerCase()
     this.boards = this.state.filter(filterList)
     function filterList(board){
@@ -30,10 +52,15 @@ export class HomeComponent implements OnInit {
   }
 
   async getBoards(){
-    await this.boardService.getBoards().subscribe(boards => {
-      this.state = boards
-      this.boards = boards
-    })
+    try{
+      await this.boardService.getBoards().subscribe(boards => {
+        this.state = boards
+        this.boards = boards
+      })
+    }
+    catch(error){
+      console.error(error)
+    }
   }
 
   toggleCreationModal(){

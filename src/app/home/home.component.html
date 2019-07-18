@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<input class="search" placeholder="Search board" (keyup)="search($event)"/>
+<input class="search" placeholder="Search board" (keyup)="handleSearch($event)"/>
 
 <section class="board" *ngFor="let board of boards">
   <h1>{{ board.title }}</h1>
@@ -24,10 +24,10 @@
 <div class="creation-background" [ngStyle]="isModalActiveStyle">
   <section class="creation-menu">
     <h1>New board</h1>
-    <input placeholder="Board name" />
+    <input placeholder="Board name" (keyup)="handleNewBoardTitle($event)" [value]="newBoardTitle"/>
     <div class="button-container">
       <button class="close-button" (click)="toggleCreationModal()">CLOSE</button>
-      <button class="create-button">CREATE</button>
+      <button class="create-button" (click)="createBoard()">CREATE</button>
     </div>
   </section>
 </div>
