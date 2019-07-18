@@ -12,42 +12,42 @@
 <section class="board">
   <h1>How do you feel about it?</h1>
   <section>
-    <strong>BOARD</strong>
+    <strong>#4</strong>
     <h2>17/07/2019</h2>
   </section>
 </section>
 <section class="board">
   <h1>What about the weather today?</h1>
   <section>
-    <strong>BOARD</strong>
+    <strong>#3</strong>
     <h2>19/06/2019</h2>
   </section>
 </section>
 <section class="board">
   <h1>Do you like the anonymous board?</h1>
   <section>
-    <strong>BOARD</strong>
+    <strong>#2</strong>
     <h2>18/07/2018</h2>
   </section>
 </section>
 <section class="board">
   <h1>What do you think would be good to improve this site?</h1>
   <section>
-    <strong>BOARD</strong>
+    <strong>#1</strong>
     <h2>21/05/2018</h2>
   </section>
 </section>
 
-<button class="create">
+<button class="create" (click)="toggleCreationModal()" [ngStyle]="isCreateButtonActiveStyle">
   <img src="../../assets/add.png" />
 </button>
 
-<div class="creation-background">
+<div class="creation-background" [ngStyle]="isModalActiveStyle">
   <section class="creation-menu">
     <h1>New board</h1>
     <input placeholder="Board name" />
     <div class="button-container">
-      <button class="close-button">CLOSE</button>
+      <button class="close-button" (click)="toggleCreationModal()">CLOSE</button>
       <button class="create-button">CREATE</button>
     </div>
   </section>
