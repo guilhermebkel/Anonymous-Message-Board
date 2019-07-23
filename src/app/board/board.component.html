@@ -1,3 +1,24 @@
-<p>
-  board works!
-</p>
+<section class="title">
+    <h1>
+      What about this
+    </h1>
+</section>
+
+<section class="thread">
+  
+</section>
+
+<button class="create" (click)="toggleCreationModal()" [ngStyle]="isCreateButtonActiveStyle">
+  <img src="../../assets/add.png" />
+</button>
+  
+<div class="creation-background" [ngStyle]="isModalActiveStyle">
+  <section class="creation-menu">
+    <h1>New thread</h1>
+    <input placeholder="Thread name" (keyup)="handleNewThreadTitle($event)" [value]="newThreadTitle"/>
+    <div class="button-container">
+      <button class="close-button" (click)="toggleCreationModal()">CLOSE</button>
+      <button class="create-button" (click)="createThread()">CREATE</button>
+    </div>
+  </section>
+</div>
