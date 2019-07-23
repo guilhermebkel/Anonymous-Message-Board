@@ -10,11 +10,13 @@
 <input class="search" placeholder="Search board" (keyup)="handleSearch($event)"/>
 
 <section class="board" *ngFor="let board of boards">
-  <h1>{{ board.title }}</h1>
-  <section>
-    <strong>#{{ board.id }}</strong>
-    <h2>{{ board.created_at | date:'dd/MM/yyyy'}}</h2>
-  </section>
+  <a [routerLink]="['/board', board.id]">
+    <h1>{{ board.title }}</h1>
+    <section>
+      <strong>#{{ board.id }}</strong>
+      <h2>{{ board.created_at | date:'dd/MM/yyyy'}}</h2>
+    </section>
+  </a>
 </section>
 
 <button class="create" (click)="toggleCreationModal()" [ngStyle]="isCreateButtonActiveStyle">
