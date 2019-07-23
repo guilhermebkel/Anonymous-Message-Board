@@ -1,3 +1,4 @@
+const { boot } = require('../core')
 const fetch = require('node-fetch')
 const assert = require('assert')
 
@@ -13,6 +14,11 @@ async function test(){
     describe('Board Tests', function() {
     
         this.timeout(Infinity)
+
+        this.beforeAll(function(done){
+            new Promise(callback => boot(callback))
+            .then(() => done())
+        })
     
         it('[GET] /boards - Get all boards', async () => {
             const result = await fetch(`${process.env.LOCAL_HOST}/boards`, { method: 'GET' })

@@ -1,24 +1,6 @@
 module.exports = (models) => {
   const associations = [
     {
-      from: models.ReplyModel,
-      relation: 'hasMany',
-      to: models.ThreadModel,
-      options: {
-        as: 'Replies',
-        constraints: false
-      }
-    },
-    {
-      from: models.ThreadModel,
-      relation: 'hasMany',
-      to: models.BoardModel,
-      options: {
-        as: 'Threads',
-        constraints: false
-      }
-    },
-    {
       from: models.BoardModel,
       relation: 'belongsTo',
       to: models.ThreadModel,
