@@ -10,10 +10,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       required: true,
     },
-    threads: {
-      type: DataTypes.JSONB,
-      default: []
-    },
     deleted_at: {
       type: DataTypes.DATE,
       allowNull: true,

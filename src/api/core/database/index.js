@@ -1,4 +1,10 @@
 const Sequelize = require('sequelize')
+const fs = require('fs-extra')
+
+const ModelsDirectory = {
+  fromRoot: 'src/api/models',
+  fromHere: '../../models' 
+}
 
 module.exports = {
   setup
@@ -12,7 +18,7 @@ async function setup (){
   await status()
 
   console.log('Synchronizing models...')
-  await sequelize.sync()
+  await sync()
 }
 
 function connect(){
@@ -41,4 +47,14 @@ async function status(){
   catch(error) {
     console.error(error)
   }
+}
+
+async function sync(){
+  const models = await fs.readdir(ModelsDirectory.fromRoot)
+  .then(models => models)
+  .catch(error => console.error(error))
+
+  await models.map(model => require(`${ModelsDirectory.fromHere}/${model}`)(sequelize, Sequelize))
+
+  await sequelize.sync({ force: process.env.FORCE_SYNC })
 }

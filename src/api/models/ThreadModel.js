@@ -31,10 +31,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       required: true,
     },
-    replies: {
-      type: DataTypes.JSONB,
-      default: [],
-    },
     deleted_at: {
       type: DataTypes.DATE,
       allowNull: true,
