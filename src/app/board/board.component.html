@@ -5,7 +5,18 @@
 </section>
 
 <section class="thread">
-  
+  <div class="buttons">
+    <button id="report">REPORT</button>
+    <button id="delete">DELETE</button>
+  </div>
+  <h1>What about it?</h1>
+  <section class="reply">
+    <p>That's what I think about it...</p>
+  </section>
+  <div class="new-reply">
+    <input placeholder="Write a reply" />
+    <img src="../../assets/arrow-right.png" />
+  </div>
 </section>
 
 <button class="create" (click)="toggleCreationModal()" [ngStyle]="isCreateButtonActiveStyle">
