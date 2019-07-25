@@ -81,6 +81,22 @@
         margin-top: 0;
     }
 
+    .reply{
+        width: 80%;
+        background-color: white;
+        margin: 0 auto;
+        border-radius: 5px;
+
+        p{
+            color: rgb(0, 0, 0);
+            opacity: 0.8;
+            font-size: 12px;
+            padding: 5px 15px;
+            text-align: justify;
+            letter-spacing: 0;
+        }
+    }
+
     .new-reply{
         outline: none;
         border: solid 2px #8658eb;
