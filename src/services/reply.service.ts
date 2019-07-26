@@ -4,13 +4,15 @@ import { map } from 'rxjs/operators'
 import { environment } from 'src/environments/environment.prod'
 import { Observable } from 'rxjs';
 
+const api = environment.online_api
+
 @Injectable()
 export class ReplyService{
 
   constructor(private http: HttpClient) {}
 
   getReplies(board_id): Observable<[]>{
-    return this.http.get<[]>(environment.online_api + `/replies/${board_id}`)
+    return this.http.get<[]>(api + `/replies/${board_id}`)
   }
 
   createThread(data): Observable<[]>{
@@ -21,7 +23,7 @@ export class ReplyService{
     };
     
     return this.http.post<[]>(
-      environment.online_api + '/threads', 
+      api + '/replies', 
       JSON.stringify(data),
       options
     )

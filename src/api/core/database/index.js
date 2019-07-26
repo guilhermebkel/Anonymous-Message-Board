@@ -17,8 +17,10 @@ async function setup (){
   console.log('Testing database connection...')
   await status()
 
-  console.log('Synchronizing models...')
-  await sync()
+  if(process.env.FORCE_SYNC === true){
+    console.log('Synchronizing models...')
+    await sync()
+  }
 }
 
 function connect(){
@@ -56,5 +58,5 @@ async function sync(){
 
   await models.map(model => require(`${ModelsDirectory.fromHere}/${model}`)(sequelize, Sequelize))
 
-  await sequelize.sync({ force: process.env.FORCE_SYNC })
+  await sequelize.sync({ force: true })
 }

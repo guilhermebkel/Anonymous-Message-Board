@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { ThreadService } from '../../services/thread.service'
 import { ReplyService } from '../../services/reply.service'
 import { ActivatedRoute } from '@angular/router'
-import { Observable } from 'rxjs'
-import { map } from "rxjs/operators"
 
 @Component({
   selector: 'app-board',
@@ -12,7 +10,6 @@ import { map } from "rxjs/operators"
 })
 export class BoardComponent implements OnInit {
 
-  state$: Observable<object>;
   board_id: String = ''
   board_title: String = ''
   threads: Object[] = []
@@ -24,6 +21,7 @@ export class BoardComponent implements OnInit {
   newThreadTitle: String = ''
   newThreadPassword: String = ''
   newReplyTitle: String = ''
+  newReplyPassword: String = ''
 
   constructor(
     private threadService: ThreadService, 
@@ -31,13 +29,11 @@ export class BoardComponent implements OnInit {
     private replyService: ReplyService,
   ){}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.board_id = this.route.snapshot.paramMap.get('id')
+    this.board_title = this.route.snapshot.queryParamMap.get('title')
     this.getThreads(this.board_id)
     this.getReplies(this.board_id)
-    this.state$ = await this.route.paramMap
-      .pipe(map(() => window.history.state))
-    console.log(this.state$)
   }
 
   handleNewThreadTitle(event){
@@ -45,6 +41,9 @@ export class BoardComponent implements OnInit {
   }
   handleNewThreadPassword(event){
     this.newThreadPassword = event.target.value
+  }
+  handleNewReplyTitle(event){
+    this.newReplyTitle = event.target.value
   }
 
   async createThread(){
@@ -87,18 +86,17 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  async createReply(thread_id, text, delete_password){
+  async createReply(thread_id){
     try{
       await this.replyService.createThread({ 
-        text,
+        text: this.newReplyTitle,
         board_id: this.board_id,
         thread_id,
-        delete_password,
+        delete_password: "this.newReplyPassword",
       }).subscribe(reply => {
-        this.replies.unshift(reply)
-        this.toggleCreationModal()
-        this.newThreadTitle = ''
-        this.newThreadPassword = ''
+        this.replies.push(reply)
+        this.newReplyTitle = ''
+        this.newReplyPassword = ''
       })
     }
     catch(error){
