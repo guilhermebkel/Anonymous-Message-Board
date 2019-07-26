@@ -8,6 +8,7 @@ const ThreadModel = require('../models/ThreadModel')(sequelize, DataTypes)
 module.exports = {
   createReply,
   getRepliesByThreadId,
+  getRepliesByBoardId,
   deleteReply,
   updateReply,
 }
@@ -17,7 +18,7 @@ async function createReply(req, res) {
     await bcrypt.hash(req.body.delete_password, saltRounds, async (error, hash) => {
       if (hash) {
         const newReply = await ReplyModel.create({ ...req.body, delete_password: hash })
-        await ThreadModel.update({ bumped_on: new Date }, { where: { id: req.params.thread_id } })
+        await ThreadModel.update({ bumped_on: new Date }, { where: { id: req.body.thread_id } })
         res.json(newReply)
       }
       else {
@@ -34,9 +35,25 @@ async function createReply(req, res) {
 async function getRepliesByThreadId(req, res) {
   try {
     const replies = await ReplyModel.findAll({
-      order: [[ 'created_at', 'DESC' ]], 
+      order: [[ 'created_at', 'ASC' ]], 
       where: { 
         thread_id: req.params.thread_id,
+        deleted_at: null
+      }
+    })
+    res.json(replies)
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
+async function getRepliesByBoardId(req, res) {
+  try {
+    const replies = await ReplyModel.findAll({
+      order: [[ 'created_at', 'DESC' ]], 
+      where: { 
+        board_id: req.params.board_id,
         deleted_at: null
       }
     })

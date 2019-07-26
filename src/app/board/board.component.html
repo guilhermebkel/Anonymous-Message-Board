@@ -1,22 +1,30 @@
 <section class="title">
     <h1>
-      What about this
+      {{ board_title }}
     </h1>
 </section>
 
-<section class="thread">
+<section class="thread" *ngFor="let thread of threads">
   <div class="buttons">
-    <button id="report">REPORT</button>
-    <button id="delete">DELETE</button>
+    <button id="report-thread">REPORT</button>
+    <button id="delete-thread">DELETE</button>
   </div>
-  <h1>What about it?</h1>
-  <section class="reply">
-    <p>That's what I think about it...</p>
+  <h1>{{ thread.text }}</h1>
+  <section class="reply" *ngFor="let reply of replies">
+    <ng-container *ngIf="reply.thread_id === thread.id">
+      <div class="buttons">
+        <button id="report-reply">REPORT</button>
+        <button id="delete-reply">DELETE</button>
+      </div>
+      <p>{{ reply.text }}</p>
+      <h2><strong>Reported:</strong> {{ reply.reported }}</h2>
+    </ng-container>
   </section>
   <div class="new-reply">
-    <input placeholder="Write a reply" />
-    <img src="../../assets/arrow-right.png" />
+    <input placeholder="Write a reply" (keyup)="handleNewReplyTitle($event)" [value]="newReplyTitle" />
+    <img src="../../assets/arrow-right.png" (click)="createReply(thread.id)" />
   </div>
+  <h3><strong>Reported:</strong> {{ thread.reported }}</h3>
 </section>
 
 <button class="create" (click)="toggleCreationModal()" [ngStyle]="isCreateButtonActiveStyle">
@@ -26,7 +34,8 @@
 <div class="creation-background" [ngStyle]="isModalActiveStyle">
   <section class="creation-menu">
     <h1>New thread</h1>
-    <input placeholder="Thread name" (keyup)="handleNewThreadTitle($event)" [value]="newThreadTitle"/>
+    <input placeholder="Thread name" type="text" (keyup)="handleNewThreadTitle($event)" [value]="newThreadTitle"/>
+    <input placeholder="Delete password" type="password" (keyup)="handleNewThreadPassword($event)" [value]="newThreadPassword"/>
     <div class="button-container">
       <button class="close-button" (click)="toggleCreationModal()">CLOSE</button>
       <button class="create-button" (click)="createThread()">CREATE</button>

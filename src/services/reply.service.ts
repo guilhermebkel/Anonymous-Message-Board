@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 const api = environment.online_api
 
 @Injectable()
-export class BoardService{
+export class ReplyService{
 
   constructor(private http: HttpClient) {}
 
-  getBoards(): Observable<[]>{
-    return this.http.get<[]>(api + '/boards')
+  getReplies(board_id): Observable<[]>{
+    return this.http.get<[]>(api + `/replies/${board_id}`)
   }
 
-  createBoard(title): Observable<[]>{
+  createThread(data): Observable<[]>{
     const options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
@@ -23,8 +23,8 @@ export class BoardService{
     };
     
     return this.http.post<[]>(
-      api + '/boards', 
-      JSON.stringify(title),
+      api + '/replies', 
+      JSON.stringify(data),
       options
     )
   }

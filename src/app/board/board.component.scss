@@ -1,9 +1,8 @@
 .title {
     background-color: black;
-    margin: 10px;
     width: auto;
     display: flex;
-    border-radius: 5px;
+    margin-bottom: 20px;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
 
     h1 {
@@ -17,7 +16,7 @@
 .thread{
     width: 300px;
     background-color: #651fff;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     border-radius: 5px;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
     padding-bottom: 10px;
@@ -33,7 +32,7 @@
             font-weight: bold;
             color: #280574;
         }
-        #report{
+        #report-thread{
             border-top-left-radius: 5px;
             outline: none;
             background-color: transparent;
@@ -44,7 +43,7 @@
             -o-transition: all 0.25s ease;
             transition: all 0.25s ease;
         }
-        #report:hover{
+        #report-thread:hover{
             background-color: black;
             color: white;
             -webkit-transition: all 0.25s ease;
@@ -52,7 +51,7 @@
             -o-transition: all 0.25s ease;
             transition: all 0.25s ease;
         }
-        #delete{
+        #delete-thread{
             border-top-right-radius: 5px;
             outline: none;
             background-color: transparent;
@@ -63,7 +62,7 @@
             -o-transition: all 0.25s ease;
             transition: all 0.25s ease;
         }
-        #delete:hover{
+        #delete-thread:hover{
             background-color: black;
             color: white;
             -webkit-transition: all 0.25s ease;
@@ -84,16 +83,65 @@
     .reply{
         width: 80%;
         background-color: white;
-        margin: 0 auto;
+        margin: 0 auto 15px auto;
         border-radius: 5px;
 
+        #report-reply{
+            border: 2px solid white;
+            background-color: black;
+            color: white;
+            border-top-left-radius: 5px; 
+            cursor: pointer;
+            -webkit-transition: all 0.25s ease;
+            -moz-transition: all 0.25s ease;
+            -o-transition: all 0.25s ease;
+            transition: all 0.25s ease;
+        }
+        #report-reply:hover{
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            -webkit-transition: all 0.25s ease;
+            -moz-transition: all 0.25s ease;
+            -o-transition: all 0.25s ease;
+            transition: all 0.25s ease;
+        }
+        #delete-reply{
+            border: 2px solid white;
+            background-color: black;
+            color: white;
+            border-top-right-radius: 5px; 
+            cursor: pointer;
+            -webkit-transition: all 0.25s ease;
+            -moz-transition: all 0.25s ease;
+            -o-transition: all 0.25s ease;
+            transition: all 0.25s ease;
+        }
+        #delete-reply:hover{
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            -webkit-transition: all 0.25s ease;
+            -moz-transition: all 0.25s ease;
+            -o-transition: all 0.25s ease;
+            transition: all 0.25s ease;
+        }
         p{
+            margin-top: 0;
             color: rgb(0, 0, 0);
             opacity: 0.8;
             font-size: 12px;
             padding: 5px 15px;
             text-align: justify;
             letter-spacing: 0;
+        }
+        h2{
+            font-size: 10px;
+            text-align: left;
+            margin: 0 15px 0 15px;
+            padding-bottom: 5px;
+            font-weight: lighter;
+            opacity: 0.8;
         }
     }
 
@@ -141,6 +189,17 @@
             -o-transition: all 0.25s ease;
             transition: all 0.25s ease;
         }
+    }
+
+    h3{
+        font-size: 10px;
+        text-align: left;
+        margin: 0 30px 0 30px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-weight: lighter;
+        color: white;
+        opacity: 0.8;
     }
 }
 
@@ -211,7 +270,7 @@
             font-family: 'Roboto Mono', sans-serif !important;
             outline: none;
             width: 85%;
-            margin: 15px auto 15px 15px;
+            margin: 0 auto 15px 15px;
             height: 35px;
             background-color: #000;
             border-width: 0px;

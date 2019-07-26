@@ -14,6 +14,14 @@ module.exports = function (sequelize, DataTypes) {
         key: 'id'
       }
     },
+    board_id: {
+      type: DataTypes.INTEGER,
+      required: true,
+      references: {
+        model: 'boards',
+        key: 'id'
+      }
+    },
     text: {
       type: DataTypes.STRING,
       required: true,

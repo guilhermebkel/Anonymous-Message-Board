@@ -4,16 +4,18 @@ import { map } from 'rxjs/operators'
 import { environment } from 'src/environments/environment.prod'
 import { Observable } from 'rxjs';
 
+const api = environment.online_api
+
 @Injectable()
 export class ThreadService{
 
   constructor(private http: HttpClient) {}
 
-  getThreads(): Observable<[]>{
-    return this.http.get<[]>(environment.online_api + '/boards')
+  getThreads(board_id): Observable<[]>{
+    return this.http.get<[]>(api + `/threads/${board_id}`)
   }
 
-  createThread(title): Observable<[]>{
+  createThread(data): Observable<[]>{
     const options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
@@ -21,8 +23,8 @@ export class ThreadService{
     };
     
     return this.http.post<[]>(
-      environment.online_api + '/boards', 
-      JSON.stringify(title),
+      api + '/threads', 
+      JSON.stringify(data),
       options
     )
   }
