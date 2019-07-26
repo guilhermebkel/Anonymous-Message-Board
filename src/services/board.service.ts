@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { map } from 'rxjs/operators'
-import { environment } from 'src/environments/environment.prod'
+import { environment } from 'src/environments/environment'
 import { Observable } from 'rxjs';
-
-const api = environment.online_api
 
 @Injectable()
 export class BoardService{
@@ -12,7 +9,7 @@ export class BoardService{
   constructor(private http: HttpClient) {}
 
   getBoards(): Observable<[]>{
-    return this.http.get<[]>(api + '/boards')
+    return this.http.get<[]>(environment.api + '/boards')
   }
 
   createBoard(title): Observable<[]>{
@@ -23,7 +20,7 @@ export class BoardService{
     };
     
     return this.http.post<[]>(
-      api + '/boards', 
+      environment.api + '/boards', 
       JSON.stringify(title),
       options
     )
