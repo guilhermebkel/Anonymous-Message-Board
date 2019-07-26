@@ -51,7 +51,7 @@ async function getRepliesByThreadId(req, res) {
 async function getRepliesByBoardId(req, res) {
   try {
     const replies = await ReplyModel.findAll({
-      order: [[ 'created_at', 'DESC' ]], 
+      order: [[ 'created_at', 'ASC' ]], 
       where: { 
         board_id: req.params.board_id,
         deleted_at: null
