@@ -6,25 +6,25 @@
 
 <section class="thread" *ngFor="let thread of threads">
   <div class="buttons">
-    <button id="report-thread">REPORT</button>
+    <button id="report-thread" (click)="reportThread(thread.id)">REPORT</button>
     <button id="delete-thread">DELETE</button>
   </div>
   <h1>{{ thread.text }}</h1>
   <section class="reply" *ngFor="let reply of replies">
     <ng-container *ngIf="reply.thread_id === thread.id">
       <div class="buttons">
-        <button id="report-reply">REPORT</button>
+        <button id="report-reply" (click)="reportReply(reply, thread.id)">REPORT</button>
         <button id="delete-reply">DELETE</button>
       </div>
       <p>{{ reply.text }}</p>
-      <h2><strong>Reported:</strong> {{ reply.reported }}</h2>
+      <h2><strong>Reported:</strong> {{ reply.reported || false }}</h2>
     </ng-container>
   </section>
   <div class="new-reply">
     <input placeholder="Write a reply" (keyup)="handleNewReplyTitle($event)" [value]="newReplyTitle" />
     <img src="../../assets/arrow-right.png" (click)="createReply(thread.id)" />
   </div>
-  <h3><strong>Reported:</strong> {{ thread.reported }}</h3>
+  <h3><strong>Reported:</strong> {{ thread.reported || false }}</h3>
 </section>
 
 <button class="create" (click)="toggleCreationModal()" [ngStyle]="isCreateButtonActiveStyle">
