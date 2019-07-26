@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { ThreadService } from '../../services/thread.service'
-import { BoardService } from '../../services/board.service'
+import { ReplyService } from '../../services/reply.service'
 import { ActivatedRoute } from '@angular/router'
+import { Observable } from 'rxjs'
+import { map } from "rxjs/operators"
 
 @Component({
   selector: 'app-board',
@@ -10,40 +12,93 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class BoardComponent implements OnInit {
 
+  state$: Observable<object>;
   board_id: String = ''
+  board_title: String = ''
   threads: Object[] = []
   replies: Object[] = []
-  state: Object[] = []
   isModalActive: Boolean = false
   isModalActiveStyle: {}
   isCreateButtonActiveStyle: {}
   newThread: Object[] = []
   newThreadTitle: String = ''
+  newThreadPassword: String = ''
+  newReplyTitle: String = ''
 
   constructor(
     private threadService: ThreadService, 
     private route: ActivatedRoute, 
-    private boardService: BoardService
+    private replyService: ReplyService,
   ){}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.board_id = this.route.snapshot.paramMap.get('id')
+    this.getThreads(this.board_id)
+    this.getReplies(this.board_id)
+    this.state$ = await this.route.paramMap
+      .pipe(map(() => window.history.state))
+    console.log(this.state$)
   }
 
   handleNewThreadTitle(event){
     this.newThreadTitle = event.target.value
   }
+  handleNewThreadPassword(event){
+    this.newThreadPassword = event.target.value
+  }
 
   async createThread(){
     try{
-      await this.threadService.createThread(
-        { title: this.newThreadTitle }
-      ).subscribe(board => {
-        this.newThread = board
-        this.state.unshift(this.newThread)
-    
+      await this.threadService.createThread({ 
+        text: this.newThreadTitle,
+        board_id: this.board_id,
+        delete_password: this.newThreadPassword 
+      }).subscribe(thread => {
+        this.threads.unshift(thread)
         this.toggleCreationModal()
         this.newThreadTitle = ''
+        this.newThreadPassword = ''
+      })
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
+  async getThreads(board_id){
+    try{
+      await this.threadService.getThreads(board_id).subscribe(threads => {
+        this.threads = threads
+      })
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
+  async getReplies(board_id){
+    try{
+      await this.replyService.getReplies(board_id).subscribe(replies => {
+        this.replies = replies
+      })
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
+  async createReply(thread_id, text, delete_password){
+    try{
+      await this.replyService.createThread({ 
+        text,
+        board_id: this.board_id,
+        thread_id,
+        delete_password,
+      }).subscribe(reply => {
+        this.replies.unshift(reply)
+        this.toggleCreationModal()
+        this.newThreadTitle = ''
+        this.newThreadPassword = ''
       })
     }
     catch(error){

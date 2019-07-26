@@ -8,6 +8,7 @@ const ThreadModel = require('../models/ThreadModel')(sequelize, DataTypes)
 module.exports = {
   createReply,
   getRepliesByThreadId,
+  getRepliesByBoardId,
   deleteReply,
   updateReply,
 }
@@ -37,6 +38,22 @@ async function getRepliesByThreadId(req, res) {
       order: [[ 'created_at', 'DESC' ]], 
       where: { 
         thread_id: req.params.thread_id,
+        deleted_at: null
+      }
+    })
+    res.json(replies)
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
+async function getRepliesByThreadId(req, res) {
+  try {
+    const replies = await ReplyModel.findAll({
+      order: [[ 'created_at', 'DESC' ]], 
+      where: { 
+        board_id: req.params.board_id,
         deleted_at: null
       }
     })

@@ -5,12 +5,12 @@ import { environment } from 'src/environments/environment.prod'
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class ThreadService{
+export class ReplyService{
 
   constructor(private http: HttpClient) {}
 
-  getThreads(board_id): Observable<[]>{
-    return this.http.get<[]>(environment.online_api + `/threads/${board_id}`)
+  getReplies(board_id): Observable<[]>{
+    return this.http.get<[]>(environment.online_api + `/replies/${board_id}`)
   }
 
   createThread(data): Observable<[]>{

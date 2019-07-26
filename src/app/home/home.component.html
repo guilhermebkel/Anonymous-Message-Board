@@ -10,7 +10,7 @@
 <input class="search" placeholder="Search board" (keyup)="handleSearch($event)"/>
 
 <section class="board" *ngFor="let board of boards">
-  <a [routerLink]="['/board', board.id]">
+  <a [routerLink]="['/board', board.id]" [state]="{ example: 'data' }">
     <h1>{{ board.title }}</h1>
     <section>
       <strong>#{{ board.id }}</strong>

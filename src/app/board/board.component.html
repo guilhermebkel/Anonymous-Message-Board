@@ -6,17 +6,23 @@
 
 <section class="thread">
   <div class="buttons">
-    <button id="report">REPORT</button>
-    <button id="delete">DELETE</button>
+    <button id="report-thread">REPORT</button>
+    <button id="delete-thread">DELETE</button>
   </div>
   <h1>What about it?</h1>
   <section class="reply">
+    <div class="buttons">
+      <button id="report-reply">REPORT</button>
+      <button id="delete-reply">DELETE</button>
+    </div>
     <p>That's what I think about it...</p>
+    <h2><strong>Reported:</strong> Not yet</h2>
   </section>
   <div class="new-reply">
     <input placeholder="Write a reply" />
     <img src="../../assets/arrow-right.png" />
   </div>
+  <h3><strong>Reported:</strong> Not yet</h3>
 </section>
 
 <button class="create" (click)="toggleCreationModal()" [ngStyle]="isCreateButtonActiveStyle">
@@ -26,7 +32,8 @@
 <div class="creation-background" [ngStyle]="isModalActiveStyle">
   <section class="creation-menu">
     <h1>New thread</h1>
-    <input placeholder="Thread name" (keyup)="handleNewThreadTitle($event)" [value]="newThreadTitle"/>
+    <input placeholder="Thread name" type="text" (keyup)="handleNewThreadTitle($event)" [value]="newThreadTitle"/>
+    <input placeholder="Delete password" type="password" (keyup)="handleNewThreadPassword($event)" [value]="newThreadPassword"/>
     <div class="button-container">
       <button class="close-button" (click)="toggleCreationModal()">CLOSE</button>
       <button class="create-button" (click)="createThread()">CREATE</button>

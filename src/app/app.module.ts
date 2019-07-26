@@ -8,7 +8,8 @@ import { HomeComponent } from './home/home.component'
 import { BoardComponent } from './board/board.component'
 
 import { BoardService } from '../services/board.service'
-import { ThreadService } from 'src/services/thread.service';
+import { ThreadService } from '../services/thread.service'
+import { ReplyService } from '../services/reply.service'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ThreadService } from 'src/services/thread.service';
   providers: [
     BoardService,
     ThreadService,
+    ReplyService,
   ],
   bootstrap: [AppComponent]
 })

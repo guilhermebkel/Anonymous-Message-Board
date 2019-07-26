@@ -7,7 +7,7 @@ const BoardModel = require('../models/BoardModel')(sequelize, DataTypes)
 
 module.exports = {
     createThread,
-    getThreadByBoardId,
+    getThreadsByBoardId,
     getAllThreads,
     deleteThread,
     updateThread,
@@ -48,7 +48,7 @@ async function getAllThreads(req, res){
     }
 }
 
-async function getThreadByBoardId(req, res){
+async function getThreadsByBoardId(req, res){
     try{
         const threads = await ThreadModel.findAll({
             order: [[ 'created_at', 'DESC' ]], 
