@@ -12,7 +12,7 @@ export class ReplyService{
     return this.http.get<[]>(environment.api + `/replies/${board_id}`)
   }
 
-  createThread(data): Observable<[]>{
+  createReply(data): Observable<[]>{
     const options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
@@ -20,6 +20,34 @@ export class ReplyService{
     };
     
     return this.http.post<[]>(
+      environment.api + '/replies', 
+      JSON.stringify(data),
+      options
+    )
+  }
+
+  deleteReply(data): Observable<[]>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+        })
+    };
+    
+    return this.http.delete<[]>(
+      environment.api + '/replies', 
+      //JSON.stringify(data),
+      options
+    )
+  }
+
+  reportReply(data): Observable<[]>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+        })
+    };
+    
+    return this.http.put<[]>(
       environment.api + '/replies', 
       JSON.stringify(data),
       options

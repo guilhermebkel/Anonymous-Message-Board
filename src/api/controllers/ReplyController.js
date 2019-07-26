@@ -94,18 +94,13 @@ async function deleteReply(req, res) {
 
 async function updateReply(req, res) {
   try {
-    const reply = await ReplyModel.findOne({ where: { id: req.body.reply_id, thread_id: req.body.thread_id } })
-    bcrypt.compare(req.body.delete_password, reply.dataValues.delete_password, async (error, result) => {
-      if (result) {
-        await ReplyModel.update({ reported: true }, { where: { id: req.body.reply_id, thread_id: req.body.thread_id }})
-        res.status(200)
-        res.send('Updated!')
-      }
-      else {
-        res.status(400)
-        res.send('Incorrect password!')
-      }
-    })
+    await ReplyModel.update({ 
+      reported: true 
+    },{ 
+      where: {
+        id: req.body.reply_id, 
+        thread_id: req.body.thread_id 
+      }})
   }
   catch (error) {
     console.error(error)

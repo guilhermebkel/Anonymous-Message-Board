@@ -25,4 +25,32 @@ export class ThreadService{
       options
     )
   }
+
+  deleteThread(data): Observable<[]>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+        })
+    };
+    
+    return this.http.delete<[]>(
+      environment.api + '/threads', 
+      //JSON.stringify(data),
+      options
+    )
+  }
+
+  reportThread(thread_id): Observable<[]>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+        })
+    };
+    
+    return this.http.put<[]>(
+      environment.api + '/threads', 
+      JSON.stringify(thread_id),
+      options
+    )
+  }
 }

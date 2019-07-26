@@ -75,6 +75,19 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  async reportThread(thread_id){
+    try{
+      await this.threadService.reportThread({
+        thread_id,
+        observe: 'response'
+      }).subscribe()
+      setTimeout(() => { this.getThreads(this.board_id) }, 500)
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
   async getReplies(board_id){
     try{
       await this.replyService.getReplies(board_id).subscribe(replies => {
@@ -88,7 +101,7 @@ export class BoardComponent implements OnInit {
 
   async createReply(thread_id){
     try{
-      await this.replyService.createThread({ 
+      await this.replyService.createReply({ 
         text: this.newReplyTitle,
         board_id: this.board_id,
         thread_id,
@@ -98,6 +111,20 @@ export class BoardComponent implements OnInit {
         this.newReplyTitle = ''
         this.newReplyPassword = ''
       })
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
+  async reportReply(reply, thread_id){
+    try{
+      await this.replyService.reportReply({
+        reply_id: reply.id,
+        thread_id
+      }).subscribe()
+      setTimeout(() => { this.getReplies(this.board_id) }, 500)
+      
     }
     catch(error){
       console.error(error)
