@@ -17,7 +17,7 @@ async function setup (){
   console.log('Testing database connection...')
   await status()
 
-  if(process.env.FORCE_SYNC === true){
+  if(+process.env.FORCE_SYNC){
     console.log('Synchronizing models...')
     await sync()
   }
