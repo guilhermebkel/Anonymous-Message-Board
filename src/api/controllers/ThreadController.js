@@ -76,12 +76,10 @@ async function deleteThread(req, res){
                         id: req.body.thread_id 
                     }
                 })
-                res.status(200)
-                res.send('Deleted!')
+                res.status(200).json({ response: "Deleted!", status: 200 })
             }
             else{
-                res.status(400)
-                res.send('Incorrect password!')
+                res.status(400).json({ response: "Incorrect password!", status: 400 })
             }
         })     
     }
@@ -93,8 +91,7 @@ async function deleteThread(req, res){
 async function updateThread(req, res){
     try{
         await ThreadModel.update({ reported: true }, { where: { id: req.body.thread_id }})
-        res.status(200)
-        res.send('Updated!')
+        res.status(200).json({ response: "Updated!", status: 200 })
     }
     catch(error){
         console.error(error)

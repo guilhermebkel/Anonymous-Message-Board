@@ -7,14 +7,14 @@
 <section class="thread" *ngFor="let thread of threads">
   <div class="buttons">
     <button id="report-thread" (click)="reportThread(thread.id)">REPORT</button>
-    <button id="delete-thread">DELETE</button>
+    <button id="delete-thread" (click)="toggleDeleteModal('thread', thread.id, null)">DELETE</button>
   </div>
   <h1>{{ thread.text }}</h1>
   <section class="reply" *ngFor="let reply of replies">
     <ng-container *ngIf="reply.thread_id === thread.id">
       <div class="buttons">
         <button id="report-reply" (click)="reportReply(reply, thread.id)">REPORT</button>
-        <button id="delete-reply">DELETE</button>
+        <button id="delete-reply" (click)="toggleDeleteModal('reply')">DELETE</button>
       </div>
       <p>{{ reply.text }}</p>
       <h2><strong>Reported:</strong> {{ reply.reported || false }}</h2>
@@ -39,6 +39,17 @@
     <div class="button-container">
       <button class="close-button" (click)="toggleCreationModal()">CLOSE</button>
       <button class="create-button" (click)="createThread()">CREATE</button>
+    </div>
+  </section>
+</div>
+
+<div class="creation-background" [ngStyle]="isDeleteModalActiveStyle">
+  <section class="creation-menu">
+    <h1>Delete {{ deleteOptions.type }}</h1>
+    <input placeholder="Delete password" type="password" (keyup)="handleDeletePassword($event)" [value]="deleteOptions.delete_password"/>
+    <div class="button-container">
+      <button class="close-button" (click)="toggleDeleteModal()">CLOSE</button>
+      <button class="create-button" (click)="delete()">DELETE</button>
     </div>
   </section>
 </div>

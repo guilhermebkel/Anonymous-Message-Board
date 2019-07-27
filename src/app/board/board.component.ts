@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ThreadService } from '../../services/thread.service'
 import { ReplyService } from '../../services/reply.service'
 import { ActivatedRoute } from '@angular/router'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-board',
@@ -15,9 +16,16 @@ export class BoardComponent implements OnInit {
   threads: Object[] = []
   replies: Object[] = []
   isModalActive: Boolean = false
+  isDeleteModalActive: Boolean = false
   isModalActiveStyle: {}
+  isDeleteModalActiveStyle: {}
   isCreateButtonActiveStyle: {}
-  newThread: Object[] = []
+  deleteOptions: {
+    type: String,
+    thread_id: Number,
+    reply_id: Number,
+    delete_password: String,
+  }
   newThreadTitle: String = ''
   newThreadPassword: String = ''
   newReplyTitle: String = ''
@@ -44,6 +52,9 @@ export class BoardComponent implements OnInit {
   }
   handleNewReplyTitle(event){
     this.newReplyTitle = event.target.value
+  }
+  handleDeletePassword(event){
+    this.deleteOptions.delete_password = event.target.value
   }
 
   async createThread(){
@@ -124,7 +135,31 @@ export class BoardComponent implements OnInit {
         thread_id
       }).subscribe()
       setTimeout(() => { this.getReplies(this.board_id) }, 500)
-      
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
+
+  async delete(){
+    try{
+      if(this.deleteOptions.type === 'thread'){
+        await this.threadService.deleteThread({ 
+          thread_id: this.deleteOptions.thread_id,
+          delete_password: this.deleteOptions.delete_password,  
+        }).subscribe()
+        await setTimeout(() => { this.getThreads(this.board_id) }, 500)
+        this.toggleDeleteModal()
+      }
+      else if(this.deleteOptions.type === 'reply'){
+        await this.replyService.deleteReply({
+          thread_id: this.deleteOptions.thread_id,
+          delete_password: this.deleteOptions.delete_password,
+          reply_id: this.deleteOptions.reply_id,
+        }).subscribe()
+        await setTimeout(() => { this.getReplies(this.board_id) }, 500)
+        this.toggleDeleteModal()
+      }
     }
     catch(error){
       console.error(error)
@@ -132,8 +167,27 @@ export class BoardComponent implements OnInit {
   }
 
   toggleCreationModal(){
-    this.isModalActive = !this.isModalActive
-    this.isModalActiveStyle = this.isModalActive ? {'display': 'block'} : {'display': 'none',}
-    this.isCreateButtonActiveStyle = this.isModalActive ? {'transform': 'rotate(45deg)'} : {'transform': 'rotate(0)'}
+    if(this.isDeleteModalActive){
+      this.isDeleteModalActive = !this.isDeleteModalActive
+      this.isDeleteModalActiveStyle = this.isDeleteModalActive ? {'display': 'block'} : {'display': 'none'}
+      this.isCreateButtonActiveStyle = this.isModalActive ? {'transform': 'rotate(45deg)'} : {'transform': 'rotate(0)'}
+    }
+    else{
+      this.isModalActive = !this.isModalActive
+      this.isModalActiveStyle = this.isModalActive ? {'display': 'block'} : {'display': 'none'}
+      this.isCreateButtonActiveStyle = this.isModalActive ? {'transform': 'rotate(45deg)'} : {'transform': 'rotate(0)'}
+    }
+  }
+
+  toggleDeleteModal(type='', thread_id=0, reply_id=0){
+    this.deleteOptions = {
+      type,
+      thread_id,
+      reply_id,
+      delete_password: ''
+    }
+    this.isDeleteModalActive = !this.isDeleteModalActive
+    this.isDeleteModalActiveStyle = this.isDeleteModalActive ? {'display': 'block'} : {'display': 'none'}
+    this.isCreateButtonActiveStyle = this.isDeleteModalActive ? {'transform': 'rotate(45deg)'} : {'transform': 'rotate(0)'}
   }
 }

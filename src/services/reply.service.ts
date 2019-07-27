@@ -30,12 +30,12 @@ export class ReplyService{
     const options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
-        })
+      }),
+      body: data
     };
     
     return this.http.delete<[]>(
       environment.api + '/replies', 
-      //JSON.stringify(data),
       options
     )
   }
