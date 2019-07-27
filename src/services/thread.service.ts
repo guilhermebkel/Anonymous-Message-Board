@@ -26,16 +26,16 @@ export class ThreadService{
     )
   }
 
-  deleteThread(data): Observable<[]>{
+  deleteThread(data): Observable<{response: String, status: Number}>{
     const options = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json'
-        })
+        'Content-Type': 'application/json'
+      }),
+      body: data
     };
     
-    return this.http.delete<[]>(
+    return this.http.delete<{response: String, status: Number}>(
       environment.api + '/threads', 
-      //JSON.stringify(data),
       options
     )
   }
@@ -44,7 +44,7 @@ export class ThreadService{
     const options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'
-        })
+      })
     };
     
     return this.http.put<[]>(
