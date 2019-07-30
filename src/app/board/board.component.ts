@@ -28,8 +28,6 @@ export class BoardComponent implements OnInit {
   }
   newThreadTitle: String = ''
   newThreadPassword: String = ''
-  newReplyTitle: String = ''
-  newReplyPassword: String = ''
 
   constructor(
     private threadService: ThreadService, 
@@ -49,9 +47,6 @@ export class BoardComponent implements OnInit {
   }
   handleNewThreadPassword(event){
     this.newThreadPassword = event.target.value
-  }
-  handleNewReplyTitle(event){
-    this.newReplyTitle = event.target.value
   }
   handleDeletePassword(event){
     this.deleteOptions.delete_password = event.target.value
@@ -110,17 +105,16 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  async createReply(thread_id){
+  async createReply(data, thread_id){
+    console.log(data)
     try{
       await this.replyService.createReply({ 
-        text: this.newReplyTitle,
+        text: data.text,
         board_id: this.board_id,
         thread_id,
-        delete_password: "this.newReplyPassword",
+        delete_password: data.delete_password,
       }).subscribe(reply => {
         this.replies.push(reply)
-        this.newReplyTitle = ''
-        this.newReplyPassword = ''
       })
     }
     catch(error){

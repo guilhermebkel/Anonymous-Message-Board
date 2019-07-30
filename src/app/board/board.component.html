@@ -14,16 +14,17 @@
     <ng-container *ngIf="reply.thread_id === thread.id">
       <div class="buttons">
         <button id="report-reply" (click)="reportReply(reply, thread.id)">REPORT</button>
-        <button id="delete-reply" (click)="toggleDeleteModal('reply')">DELETE</button>
+        <button id="delete-reply" (click)="toggleDeleteModal('reply', thread.id, reply.id)">DELETE</button>
       </div>
       <p>{{ reply.text }}</p>
       <h2><strong>Reported:</strong> {{ reply.reported || false }}</h2>
     </ng-container>
   </section>
-  <div class="new-reply">
-    <input placeholder="Write a reply" (keyup)="handleNewReplyTitle($event)" [value]="newReplyTitle" />
-    <img src="../../assets/arrow-right.png" (click)="createReply(thread.id)" />
-  </div>
+  <form class="new-reply" #reply="ngForm" (ngSubmit)="createReply(reply.value, thread.id)">
+    <input placeholder="Write a reply" name="text" type="text" ngModel />
+    <input style="background-image: url(../../assets/arrow-right.png)" class="submit-reply" type="submit" value="      " />
+    <input placeholder="Type a password" name="delete_password" type="password" ngModel />
+  </form>
   <h3><strong>Reported:</strong> {{ thread.reported || false }}</h3>
 </section>
 
