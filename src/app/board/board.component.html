@@ -20,7 +20,7 @@
       <h2><strong>Reported:</strong> {{ reply.reported || false }}</h2>
     </ng-container>
   </section>
-  <form class="new-reply" #reply="ngForm" (ngSubmit)="createReply(reply.value, thread.id)">
+  <form class="new-reply" #form="ngForm" (ngSubmit)="createReply(form, thread.id)">
     <input placeholder="Write a reply" name="text" type="text" ngModel />
     <input style="background-image: url(../../assets/arrow-right.png)" class="submit-reply" type="submit" value="      " />
     <input placeholder="Type a password" name="delete_password" type="password" ngModel />

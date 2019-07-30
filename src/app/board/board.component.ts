@@ -105,16 +105,16 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  async createReply(data, thread_id){
-    console.log(data)
+  async createReply(form, thread_id){
     try{
       await this.replyService.createReply({ 
-        text: data.text,
+        text: form.value.text,
         board_id: this.board_id,
         thread_id,
-        delete_password: data.delete_password,
+        delete_password: form.value.delete_password,
       }).subscribe(reply => {
         this.replies.push(reply)
+        form.reset()
       })
     }
     catch(error){
